@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
+use App\Helpers\ControllerHelper;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth', ['only' => 'create', 'store']);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        //
+        return view('groups.create-group');
     }
 
     /**
@@ -34,7 +33,25 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::id();
+        
+        $group = new Group();
+        $group->creator_id = $user_id;
+
+        $missing_field = ControllerHelper::checkRequiredFields($request, Group::REQUIRED_FIELDS);
+
+        if (!is_null($missing_field)) {
+            return Response("Missing field $missing_field", 401);
+        }
+
+        foreach (Group::REQUIRED_FIELDS as $field) {
+            $group->$field = $request->$field;
+        }
+
+        $group->save();
+
+        //TODO: Redirect to correct page
+        return redirect()->route('dashboard');
     }
 
     /**

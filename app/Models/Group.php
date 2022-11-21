@@ -14,4 +14,13 @@ class Group extends Model
         return $this->hasOne('App\Models\User');
     }
 
+    /**
+     * Required fields to create a Group object,
+     * creator_id is not here since it can be fetched
+     * by the request.
+     */
+    public const REQUIRED_FIELDS = [
+        'name',
+        'description'
+    ];
 }
