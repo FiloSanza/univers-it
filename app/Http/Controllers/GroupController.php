@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use Doctrine\DBAL\Exception;
 use Illuminate\Http\Request;
 use App\Helpers\ControllerHelper;
 use Illuminate\Http\Response;
@@ -38,9 +39,7 @@ class GroupController extends Controller
         $group = new Group();
         $group->creator_id = $user_id;
 
-        $missing_field = ControllerHelper::checkRequiredFields($request, Group::REQUIRED_FIELDS);
-
-        if (!is_null($missing_field)) {
+        if ($missing_field = ControllerHelper::checkRequiredFields($request, Group::REQUIRED_FIELDS)) {
             return Response("Missing field $missing_field", 401);
         }
 
@@ -50,52 +49,55 @@ class GroupController extends Controller
 
         $group->save();
 
-        //TODO: Redirect to correct page
-        return redirect()->route('dashboard');
+        return redirect()->route('group.show', ['id' => $group->id]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        if ($group = Group::where('id', $id)->first()) {
+            return view('groups.group', ['group' => $group]);
+        }
+        
+        return Response("Not found", 404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit($id)
+    // {
+    //     //
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 }
