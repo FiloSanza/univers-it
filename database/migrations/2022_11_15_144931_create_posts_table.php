@@ -18,10 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title', 50);
             $table->string('content');
-            $table->bigInteger('userId')->unsigned();
-            $table->foreign('userId')->references('id')->on('users');
-            $table->bigInteger('groupId')->unsigned();
-            $table->foreign('groupId')->references('id')->on('groups');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger('group_id')->unsigned();
+            $table->foreign('group_id')->references('id')->on('groups');
         });
     }
 
