@@ -5,7 +5,8 @@
         </h2>
     </x-slot>
 
-    <form>
+    <form action="/create-group" method="post">
+        @csrf
         <x-input-label for="name">
             Group Name
         </x-input-label>
@@ -20,10 +21,12 @@
         </x-input-label>
         <x-textarea 
             id="description" 
+            name="description"
             rows="4"
             maxlength="500"
             class="block mt-1 w-full" 
-            placeholder="Insert a short description..." />
+            placeholder="Insert a short description..."
+            required/>
         <x-primary-button>
             Confirm
         </x-primary-button>
