@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
-use Doctrine\DBAL\Exception;
 use Illuminate\Http\Request;
 use App\Helpers\ControllerHelper;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
     public function __construct()
     {
+        // TODO: is this actually useful? check routes/web.php
         $this->middleware('auth', ['only' => 'create', 'store']);
     }
 
@@ -34,10 +33,9 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = Auth::id();
-        
+        // TODO: Validate
         $group = new Group();
-        $group->creator_id = $user_id;
+        $group->creator_id = Auth::id();
 
         if ($missing_field = ControllerHelper::checkRequiredFields($request, Group::REQUIRED_FIELDS)) {
             return Response("Missing field $missing_field", 401);
@@ -55,12 +53,13 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\View\View|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name)
     {
-        if ($group = Group::where('id', $id)->first()) {
+        // TODO: Validate
+        if ($group = Group::where('name', $name)->first()) {
             return view('groups.group', ['group' => $group]);
         }
         
