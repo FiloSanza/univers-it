@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,15 @@ Route::middleware('auth')->group(function () {
     // Group routes
     Route::get('/create-group', [GroupController::class, 'create'])->name('group.create');
     Route::post('/create-group', [GroupController::class, 'store'])->name('group.store');
+
+    // Image routes
+    Route::post('/image', [ImageController::class, 'store'])->name('image.store');
 });
 
 // Group routes
-Route::get('/group/{id}', [GroupController::class, 'show'])->name('group.show');
+Route::get('/group/{name}', [GroupController::class, 'show'])->name('group.show');
+
+// Image routes
+Route::get('/image/{id}', [ImageController::class, 'get'])->name('image.get');
 
 require __DIR__.'/auth.php';
