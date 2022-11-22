@@ -15,12 +15,12 @@ class Group extends Model
     }
 
     /**
-     * Required fields to create a Group object,
-     * creator_id is not here since it can be fetched
-     * by the request.
+     * All the validation rule that the HTTP request needs to pass.
+     * 
+     * @var array<string,string>
      */
-    public const REQUIRED_FIELDS = [
-        'name',
-        'description'
+    public const VALIDATION_RULES = [
+        'name' => 'required|string|max:255',
+        'description' => 'required|string|max:500'
     ];
 }
