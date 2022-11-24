@@ -50,16 +50,12 @@ class GroupController extends Controller
     public function show(string $name)
     {
         Validator::validate(['name' => $name], [
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255|exists:groups'
         ]);
 
-        
-
-        if ($group = Group::where('name', $name)->first()) {
-            return view('groups.group', ['group' => $group]);
-        }
-        
-        return Response("Not found", 404);
+        // TODO: Check if validator fails if group is not found, right now the redirection fails.
+        $group = Group::where('name', $name)->first();
+        return view('groups.group', ['group' => $group]);
     }
 
 }

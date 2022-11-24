@@ -27,7 +27,7 @@ class GroupFactory extends Factory
     {
         return [
             'name' => $this->faker()->word(),
-            'description' => $this->faker->paragraph(2),
+            'description' => $this->faker()->paragraph(2),
             'creator_id' => User::factory(), 
         ];
     }
