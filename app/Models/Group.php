@@ -10,8 +10,13 @@ class Group extends Model
 {
     use HasFactory, Searchable;
 
+    /**
+     * Returns the user that created the post.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function user() {
-        return $this->hasOne('App\Models\User');
+        return $this->hasOne(User::class);
     }
 
     /**

@@ -9,12 +9,22 @@ class Comment extends Model
 {
     use HasFactory;
 
+    /**
+     * Return the post this comment belongs to.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function post() {
-        return $this->hasOne('App\Models\Post');
+        return $this->hasOne(Post::class);
     }
 
+    /**
+     * Return the user that posted the comment.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function user() {
-        return $this->hasOne('App\Models\User');
+        return $this->hasOne(User::class);
     }
 
 }

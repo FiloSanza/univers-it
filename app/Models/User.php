@@ -41,4 +41,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Return the groups created by the user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function groups() {
+        return $this->hasMany(Group::class);
+    }
+
+    /**
+     * Return the posts created by the user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
 }
