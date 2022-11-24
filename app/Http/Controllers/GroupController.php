@@ -38,7 +38,7 @@ class GroupController extends Controller
 
         $group->save();
 
-        return redirect()->route('group.show', ['id' => $group->id]);
+        return redirect()->route('group.show', ['name' => $group->name]);
     }
 
     /**
