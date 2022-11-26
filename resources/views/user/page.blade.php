@@ -1,6 +1,8 @@
 @php
-    /** @var $group '\App\Models\User' */
+    /** @var $user '\App\Models\User' */
     $already_followed = $user->followers()->where(['users.id' => Auth::id()])->first();
+    $followers = $user->followers()->get();
+    $follows = $user->follows()->get();
 @endphp
 
 <x-app-layout>
@@ -14,7 +16,15 @@
         <x-users.follow-button :userid="$user->id" :isfollowed="$already_followed" />
     @endunless
     
-    <p> Followers: {{ count($user->followers()->get()) }} </p>
-    <p> Follows: {{ count($user->follows()->get()) }} </p>
+    <p> Followers: {{ count($followers) }} </p>
+    <p> Follows: {{ count($follows) }} </p>
+    
+    <br>
+    <h3> Followers </h3>
+    <x-users.list :userlist="$followers" />
+
+    <br>
+    <h3> Follows </h3>
+    <x-users.list :userlist="$follows" />
 
 </x-app-layout>
