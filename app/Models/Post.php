@@ -36,4 +36,15 @@ class Post extends Model
     public function comments() {
         return $this->hasMany(Comment::class);
     }
+
+    /*
+     * Required fields to create a Group object,
+     * creator_id and group_id are not here since they can be fetched
+     * by the request.
+     */
+    public const REQUIRED_FIELDS = [
+        'title',
+        'content'
+    ];
+
 }
