@@ -24,6 +24,8 @@ return new class extends Migration
                   ->cascadeOnDelete()
                   ->cascadeOnUpdate();
             $table->timestamps();
+
+            $table->unique(['follower_id', 'followed_id']);
         });
     }
 
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follow');
+        Schema::dropIfExists('follow_edges');
     }
 };
