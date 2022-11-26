@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function () {
 
     // Image routes
     Route::post('/image', [ImageController::class, 'store'])->name('image.store');
+
+    // FollowEdge routes
+    Route::post('/follow', FollowEdgeController::class)->name('follow');
 });
 
 // Group routes
