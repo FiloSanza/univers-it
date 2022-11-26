@@ -41,6 +41,6 @@ class FollowEdge extends Model
      * @var array<string,string>
      */
     public const VALIDATION_RULES = [
-        'followed_id' => 'required|int|exists:users,i'
+        'followed_id' => 'required|int|exists:users,id'
     ];
 }

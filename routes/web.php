@@ -42,7 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/image', [ImageController::class, 'store'])->name('image.store');
 
     // FollowEdge routes
-    Route::post('/follow', FollowEdgeController::class)->name('follow');
+    Route::post('/follow', [FollowEdgeController::class, 'store'])->name('follow');
+    Route::post('/unfollow', [FollowEdgeController::class, 'delete'])->name('unfollow');
 });
 
 // User page routes
