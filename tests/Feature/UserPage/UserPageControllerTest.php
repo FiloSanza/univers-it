@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\UserPage;
 
-use Database\Seeders\TestUsersSeeder;
+use Database\Seeders\Test\TestUsersSeeder;
 use Illuminate\Support\Str;
 use Tests\TestCaseWithSeeder;
 
@@ -15,7 +15,6 @@ class UserPageControllerTest extends TestCaseWithSeeder
      */
     public function test_show_user_page_guest()
     {
-        $this->seed(TestUsersSeeder::class);
         $this->assertNoErrorsInGetRequest(route('userpage.show', 'Filippo Sanzani'));
     }
 

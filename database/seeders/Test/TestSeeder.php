@@ -13,7 +13,7 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(TestGroupSeeder::class);
-        $this->call(TestUserSeeder::class);
+        $this->call(TestGroupsSeeder::class);
+        $this->call(TestUsersSeeder::class);
     }
 }
