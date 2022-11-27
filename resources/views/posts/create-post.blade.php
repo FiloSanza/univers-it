@@ -1,12 +1,22 @@
+@php
+    /** @var $group String: The id of the group */
+@endphp
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create Post') }}
         </h2>
     </x-slot>
-
-    <form action="/create-post" method="post">
+    
+    @if ($group)
+    <form action="/create-post?group={{$group}}" method="post">
         @csrf
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ $group }} - New Post
+            </h2>
+        </x-slot>
         <x-input-label for="title">
             Post Title
         </x-input-label>
@@ -31,4 +41,5 @@
             Confirm
         </x-primary-button>
     </form>
+    @endif
 </x-app-layout>
