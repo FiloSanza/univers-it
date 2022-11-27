@@ -21,12 +21,12 @@ class FollowEdgeController extends Controller
         $followed_id = (int)$request->followed_id;
 
         if ($followed_id == Auth::id()) {
-            return Redirect::back()->with('You cannot follow yourself.');
+            return Redirect::back()->withErrors(['error' => 'You cannot follow yourself.']);
         }
 
         $existing_edge = FollowEdge::where(['follower_id' => Auth::id(), 'followed_id' => $followed_id])->first();
         if ($existing_edge) {
-            return Redirect::back()->with('You already follow this user.');
+            return Redirect::back()->withErrors(['error' => 'You already follow this user.']);
         }
 
         $edge = new FollowEdge();
@@ -54,6 +54,6 @@ class FollowEdgeController extends Controller
             return Redirect::back()->with('Success.');
         }
 
-        return Redirect::back()->with('You did not follow this user.');
+        return Redirect::back()->withErrors(['error' => 'You did not follow this user.']);
     }
 }
