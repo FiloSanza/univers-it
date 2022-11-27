@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Helpers\ControllerHelper;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -32,18 +32,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = Auth::id();
-
-        // $group_id =
-
+        
+        $request->validate(Post::VALIDATION_RULES);
+        
         $post = new Post();
+        $user_id = Auth::id();
         $post->creator_id = $user_id;
-        //  $post->group_id = $group_id;
-        if ($missing_field = ControllerHelper::checkRequiredFields($request, Post::REQUIRED_FIELDS)) {
-            return Response("Missing field $missing_field", 401);
-        }
+        // $group_id =
+        // $post->group_id = $group_id;
 
-        foreach (Post::REQUIRED_FIELDS as $field) {
+        foreach (Post::VALIDATION_RULES as $field) {
             $post->$field = $request->$field;
         }
 
@@ -60,15 +58,20 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        if ($post = Post::where('id', $id)->first()) {
-            return view('posts.post', ['post' => $post]);
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|int|exists:posts'
+        ]);
+
+        if ($validator->fails()()) {
+            return Response("Not found", 404);
         }
 
-        return Response("Not found", 404);
+        $post = Post::where('id', $id)->first();
+        return view('posts.post', ['post' => $post]);
     }
 
     // /**
