@@ -38,8 +38,8 @@ class PostController extends Controller
         $post = new Post();
         $user_id = Auth::id();
         $post->creator_id = $user_id;
-        // $group_id =
-        // $post->group_id = $group_id;
+        $group_id = $_GET['group'];
+        $post->group_id = $group_id;
 
         foreach (Post::VALIDATION_RULES as $field) {
             $post->$field = $request->$field;
