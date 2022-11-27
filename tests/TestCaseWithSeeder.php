@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\Test\TestSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
@@ -16,7 +16,7 @@ abstract class TestCaseWithSeeder extends BaseTestCase
      * 
      * @var string
      */
-    protected $seeder = DatabaseSeeder::class;
+    protected $seeder = TestSeeder::class;
 
     /**
      * Setup the test environment.
@@ -41,5 +41,18 @@ abstract class TestCaseWithSeeder extends BaseTestCase
         $res = $this->post($route, $params);
         $res->assertRedirect($redirect)
             ->assertSessionDoesntHaveErrors();
+    }
+
+    protected function assertErrorsInGetRequest(string $route, array $params = [], array $errors = [], string $redirect = '/')
+    {
+        $res = $this->get($route, $params);
+        $res->assertSessionHasErrors($errors)
+            ->assertRedirect($redirect);
+    }
+
+    protected function assertNoErrorsInGetRequest(string $route, array $params = [])
+    {
+        $res = $this->get($route, $params);
+        $res->assertSessionDoesntHaveErrors();
     }
 }

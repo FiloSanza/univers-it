@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\UserPage;
 
+use App\Models\FollowEdge;
 use App\Models\User;
 use Database\Seeders\TestUsersSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,13 +13,6 @@ use Tests\TestCaseWithSeeder;
 class FollowTest extends TestCaseWithSeeder
 {
     use RefreshDatabase;
-
-    /**
-     * Run a specific seeder before each test.
-     * 
-     * @var string
-     */
-    protected $seeder = TestUsersSeeder::class;
 
     /**
      * Prevent users from following themselves.
@@ -35,6 +29,8 @@ class FollowTest extends TestCaseWithSeeder
             [ 'followed_id' => $user->id ],
             [ 'error' => 'You cannot follow yourself.' ]
         );
+
+        $this->assertNull($this->getEdge($user->id, $user->id));
     }
 
     /**
@@ -52,11 +48,16 @@ class FollowTest extends TestCaseWithSeeder
             route('follow'),
             [ 'followed_id' => $user_b->id ]
         );
+
+        $this->assertNotNull($this->getEdge($user_a->id, $user_b->id));
+
         $this->assertErrorsInPostRequest(
             route('follow'),
             [ 'followed_id' => $user_b->id ],
             [ 'error' => 'You already follow this user.' ]
         );
+
+        $this->assertNotNull($this->getEdge($user_a->id, $user_b->id));
     }
 
     /**
@@ -74,6 +75,8 @@ class FollowTest extends TestCaseWithSeeder
             route('follow'),
             [ 'followed_id' => $user_b->id ]
         );
+
+        $this->assertNotNull($this->getEdge($user_a->id, $user_b->id));
     }
 
     /**
@@ -109,10 +112,15 @@ class FollowTest extends TestCaseWithSeeder
             route('follow'),
             [ 'followed_id' => $user_b->id ]
         );
+
+        $this->assertNotNull($this->getEdge($user_a->id, $user_b->id));
+
         $this->assertNoErrorsInPostRequest(
             route('unfollow'),
             [ 'followed_id' => $user_b->id ]
         );
+
+        $this->assertNull($this->getEdge($user_a->id, $user_b->id));
     }
 
     public function data_for_test_follow_request_validation_errors()
@@ -140,5 +148,10 @@ class FollowTest extends TestCaseWithSeeder
             route('follow'),
             $params
         );
+    }
+
+    private function getEdge(string $follower_id, string $followed_id)
+    {
+        return FollowEdge::where([ 'follower_id' => $follower_id, 'followed_id' => $followed_id ])->first();
     }
 }
