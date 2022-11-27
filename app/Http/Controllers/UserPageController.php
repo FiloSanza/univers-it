@@ -19,7 +19,6 @@ class UserPageController extends Controller
             'name' => 'required|string|max:255|exists:users'
         ]);
 
-        // TODO: Check if validator fails if user is not found, right now the redirection fails.
         $user = User::where('name', $username)->first();
         return view('user.page', ['user' => $user]);
     }
