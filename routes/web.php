@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,7 +40,14 @@ Route::middleware('auth')->group(function () {
 
     // Image routes
     Route::post('/image', [ImageController::class, 'store'])->name('image.store');
+
+    // FollowEdge routes
+    Route::post('/follow', [FollowEdgeController::class, 'store'])->name('follow');
+    Route::post('/unfollow', [FollowEdgeController::class, 'delete'])->name('unfollow');
 });
+
+// User page routes
+Route::get('/user/{username}', [UserPageController::class, 'show'])->name('userpage.show');
 
 // Group routes
 Route::get('/group/{name}', [GroupController::class, 'show'])->name('group.show');

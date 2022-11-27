@@ -1,0 +1,117 @@
+<?php
+
+namespace Tests\Feature\UserPage;
+
+use App\Models\User;
+use Database\Seeders\TestUsersSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCaseWithSeeder;
+
+class FollowTest extends TestCaseWithSeeder
+{
+    use RefreshDatabase;
+
+    /**
+     * Run a specific seeder before each test.
+     * 
+     * @var string
+     */
+    protected $seeder = TestUsersSeeder::class;
+
+    /**
+     * Prevent users from following themselves.
+     *
+     * @return void
+     */
+    public function test_users_cannot_follow_themeselves()
+    {
+        $user = User::where('name', 'Filippo Sanzani')->first();
+        Sanctum::actingAs($user);
+
+        $this->assertErrorsInPostRequest(
+            route('follow'),
+            [ 'followed_id' => $user->id ],
+            [ 'error' => 'You cannot follow yourself.' ]
+        );
+    }
+
+    /**
+     * Prevent users from following the same user multiple times.
+     *
+     * @return void
+     */
+    public function test_cannot_follow_multiple_times()
+    {
+        $user_a = User::where('name', 'Filippo Sanzani')->first();
+        $user_b = User::where('name', 'Lorenzo Drudi')->first();
+        Sanctum::actingAs($user_a);
+
+        $this->assertNoErrorsInPostRequest(
+            route('follow'),
+            [ 'followed_id' => $user_b->id ]
+        );
+        $this->assertErrorsInPostRequest(
+            route('follow'),
+            [ 'followed_id' => $user_b->id ],
+            [ 'error' => 'You already follow this user.' ]
+        );
+    }
+
+    /**
+     * Test correct user follow request.
+     * 
+     * @return void
+     */
+    public function test_follow()
+    {
+        $user_a = User::where('name', 'Filippo Sanzani')->first();
+        $user_b = User::where('name', 'Lorenzo Drudi')->first();
+        Sanctum::actingAs($user_a);
+
+        $this->assertNoErrorsInPostRequest(
+            route('follow'),
+            [ 'followed_id' => $user_b->id ]
+        );
+    }
+
+    /**
+     * A user cannot unfollow a user if he is not following them.
+     * 
+     * @return void
+     */
+    public function test_cannot_unfollow_if_not_following()
+    {
+        $user_a = User::where('name', 'Filippo Sanzani')->first();
+        $user_b = User::where('name', 'Lorenzo Drudi')->first();
+        Sanctum::actingAs($user_a);
+
+        $this->assertErrorsInPostRequest(
+            route('unfollow'), 
+            ['followed_id' => $user_b->id], 
+            [ 'error' => 'You did not follow this user.' ]
+        );
+    }
+
+    /**
+     * Test correct unfollow request.
+     * 
+     * @return void
+     */
+    public function test_unfollow()
+    {
+        $user_a = User::where('name', 'Filippo Sanzani')->first();
+        $user_b = User::where('name', 'Lorenzo Drudi')->first();
+        Sanctum::actingAs($user_a);
+
+        $this->assertNoErrorsInPostRequest(
+            route('follow'),
+            [ 'followed_id' => $user_b->id ]
+        );
+        $this->assertNoErrorsInPostRequest(
+            route('unfollow'),
+            [ 'followed_id' => $user_b->id ]
+        );
+    }
+}

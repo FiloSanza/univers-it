@@ -59,4 +59,32 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * Return all the users that this user follows.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followers() {
+        return $this->belongsToMany(
+            User::class,        // Initial models we start from.
+            FollowEdge::class,  // Pivot model that connects the user models.
+            'followed_id',      // Foreign key for this user in the pivot table.
+            'follower_id'       // Foreign key pointing to the follower user model.
+        );
+    }
+
+    /**
+     * Return all the users followed by this user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function follows() {
+        return $this->belongsToMany(
+            User::class,        // Initial models we start from.
+            FollowEdge::class,  // Pivot model that connects the user models.
+            'follower_id',      // Foreign key for this user in the pivot table.
+            'followed_id'       // Foreign key pointing to the followed user model.
+        );
+    }
 }
