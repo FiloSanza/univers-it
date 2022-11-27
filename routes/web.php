@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,10 +39,17 @@ Route::middleware('auth')->group(function () {
 
     // Image routes
     Route::post('/image', [ImageController::class, 'store'])->name('image.store');
+
+    // Post routes
+    Route::get('/create-post', [PostController::class, 'create'])->name('post.create');
+    Route::post('/create-post', [PostController::class, 'store'])->name('post.store');
 });
 
 // Group routes
 Route::get('/group/{name}', [GroupController::class, 'show'])->name('group.show');
+
+// Post routes
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
 // Image routes
 Route::get('/image/{id}', [ImageController::class, 'get'])->name('image.get');
