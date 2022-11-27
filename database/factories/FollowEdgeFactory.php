@@ -2,21 +2,21 @@
 
 namespace Database\Factories;
 
-use App\Models\Group;
+use App\Models\FollowEdge;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Group>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FollowEdge>
  */
-class GroupFactory extends Factory
+class FollowEdgeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Group::class;
+    protected $model = FollowEdge::class;
 
     /**
      * Define the model's default state.
@@ -26,9 +26,8 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
-            'description' => $this->faker->paragraph(),
-            'creator_id' => User::factory(), 
+            'followed_id' => User::factory(),
+            'follower_id' => User::factory()
         ];
     }
 }
