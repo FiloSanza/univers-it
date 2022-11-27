@@ -114,4 +114,31 @@ class FollowTest extends TestCaseWithSeeder
             [ 'followed_id' => $user_b->id ]
         );
     }
+
+    public function data_for_test_follow_request_validation_errors()
+    {
+        return [
+            'id is a string' => [ 'asd' ],
+            'id is missing' => [ null ],
+            'id does not exist' => [ '-1' ],
+        ];
+    }
+
+    /**
+     * Test request validation for follow requests.
+     *
+     * @return void
+     * @dataProvider data_for_test_follow_request_validation_errors
+     */
+    public function test_follow_request_validation_errors(?string $user_id) 
+    {
+        $user = User::where('name', 'Filippo Sanzani')->first();
+        Sanctum::actingAs($user);
+
+        $params = $user_id ? [ 'followed_id' => $user_id ] : [];
+        $this->assertErrorsInPostRequest(
+            route('follow'),
+            $params
+        );
+    }
 }

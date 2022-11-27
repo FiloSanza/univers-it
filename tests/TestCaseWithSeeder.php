@@ -29,7 +29,7 @@ abstract class TestCaseWithSeeder extends BaseTestCase
         $this->seed($this->seeder);
     }
 
-    protected function assertErrorsInPostRequest(string $route, array $params, array $errors, string $redirect = '/')
+    protected function assertErrorsInPostRequest(string $route, array $params, array $errors = [], string $redirect = '/')
     {
         $res = $this->post($route, $params);
         $res->assertRedirect($redirect)
