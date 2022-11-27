@@ -15,7 +15,6 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $request->validate(Comment::VALIDATION_RULES);
-        //post_id - user_id - content
         $comment = new Comment();
         $comment->user_id = Auth::id();
 
