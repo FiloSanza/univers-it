@@ -72,7 +72,7 @@ class PostController extends Controller
             'id' => 'required|int|exists:posts'
         ]);
 
-        if ($validator->fails()()) {
+        if ($validator->fails()) {
             return Response("Not found", 404);
         }
 
