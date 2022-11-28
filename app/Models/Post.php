@@ -44,7 +44,8 @@ class Post extends Model
      */
     public const VALIDATION_RULES = [
         'title' => 'required|string|max:255',
-        'content'=> 'required|string|max:500'
+        'content' => 'required|string|max:500',
+        'group_id' => 'required|int|exists:groups'
     ];
 
 }
