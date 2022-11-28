@@ -20,7 +20,9 @@ class PostController extends Controller
      */
     public function create($id)
     {
-        return view('posts.create-post', ['group' => $id]);
+        Validator::validate(['id' => $id], ['id' => 'required|int|exists:groups']);
+        $group = Group::where('id', $id)->first();
+        return view('posts.create-post', ['group' => $group]);
     }
 
     /**

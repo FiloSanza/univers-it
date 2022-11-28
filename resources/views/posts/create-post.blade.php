@@ -1,5 +1,5 @@
 @php
-    /** @var $group String: The id of the group */
+    /** @var $group '\App\Models\Group' */
 @endphp
 
 <x-app-layout>
@@ -14,7 +14,7 @@
         @csrf
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ $group }} - New Post
+                {{ $group->name }} - New Post
             </h2>
         </x-slot>
         <x-input-label for="title">
