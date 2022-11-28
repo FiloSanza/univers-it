@@ -50,10 +50,6 @@ class PostController extends Controller
             $post->$field = $request->$field;
         }
 
-        if (isset($request['image'])) {
-            $post['image'] = $request['image'];
-        }
-
         $post->save();
 
         return redirect()->route('post.show', ['id' => $post->id]);
