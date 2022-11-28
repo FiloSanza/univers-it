@@ -9,7 +9,7 @@
         </h2>
     </x-slot>
     
-    ?group={{$group}}    <form action="/create-post" method="post">
+    <form action="/create-post" method="post">
         @csrf
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">

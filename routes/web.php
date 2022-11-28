@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/image', [ImageController::class, 'store'])->name('image.store');
 
     // Post routes
-    Route::get('/create-post/{group}', [PostController::class, 'create'])->name('post.create');
+    Route::get('/create-post/{group_id}', [PostController::class, 'create'])->name('post.create');
     Route::post('/create-post', [PostController::class, 'store'])->name('post.store');
 
     // FollowEdge routes
