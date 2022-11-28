@@ -15,11 +15,12 @@ class PostController extends Controller
     /**
      * Show the form for creating a new post.
      *
+     * @param int $id of the group
      * @return \Illuminate\Http\Response
      */
-    public function create($group)
+    public function create($id)
     {
-        return view('posts.create-post', ['group' => $group]);
+        return view('posts.create-post', ['group' => $id]);
     }
 
     /**
