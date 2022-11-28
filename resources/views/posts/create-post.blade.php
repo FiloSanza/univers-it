@@ -9,8 +9,7 @@
         </h2>
     </x-slot>
     
-    @if ($group)
-    <form action="/create-post?group={{$group}}" method="post">
+    ?group={{$group}}    <form action="/create-post" method="post">
         @csrf
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -37,9 +36,9 @@
             class="block mt-1 w-full" 
             placeholder="Insert the post's content..."
             required/>
+        <input type="hidden" name="group_id" value="{{ $group->id}}" />
         <x-primary-button>
             Confirm
         </x-primary-button>
     </form>
-    @endif
 </x-app-layout>

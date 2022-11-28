@@ -6,7 +6,6 @@ use App\Models\Post;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -40,12 +39,8 @@ class PostController extends Controller
         $post = new Post();
         $user_id = Auth::id();
         $post->user_id = $user_id;
-        if (! isset($_GET['group'])) {
-            return Response("Not found", 404);
-        }
-        $group_name = $_GET['group'];
-        $group = Group::where('name', $group_name)->first();
-        $post->group_id = $group->id;
+        $group_id = $request['group_id'];
+        $post->group_id = $group_id;
         
         foreach (Post::VALIDATION_RULES as $field => $_) {
             $post->$field = $request->$field;
