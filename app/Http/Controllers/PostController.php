@@ -20,7 +20,8 @@ class PostController extends Controller
      */
     public function create($id)
     {
-        Validator::validate(['id' => $id], ['id' => 'required|int|exists:groups']);
+        Validator::validate(['id' => $id], [
+            'id' => 'required|int|exists:groups']);
         $group = Group::where('id', $id)->first();
         return view('posts.create-post', ['group' => $group]);
     }
@@ -63,16 +64,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $validator = Validator::make(['id' => $id], [
+        Validator::validate(['id' => $id], [
             'id' => 'required|int|exists:posts'
         ]);
-
-        if ($validator->fails()) {
-            return Response("Not found", 404);
-        }
 
         $post = Post::where('id', $id)->first();
         return view('posts.post', ['post' => $post]);
     }
-    
+
 }
