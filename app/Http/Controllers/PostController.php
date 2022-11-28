@@ -74,40 +74,5 @@ class PostController extends Controller
         $post = Post::where('id', $id)->first();
         return view('posts.post', ['post' => $post]);
     }
-
-    /**
-     * Show the form for editing the specified post.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-    /**
-     * Remove the post from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
-        $post = Post::where('id', $request['id'])->first();
-        $post->delete();
-        return Redirect::back()->with('Success.');  
-    }
+    
 }
