@@ -39,8 +39,6 @@ class PostController extends Controller
         $post = new Post();
         $user_id = Auth::id();
         $post->user_id = $user_id;
-        $group_id = $request['group_id'];
-        $post->group_id = $group_id;
         
         foreach (Post::VALIDATION_RULES as $field => $_) {
             $post->$field = $request->$field;
