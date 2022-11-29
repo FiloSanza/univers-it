@@ -7,7 +7,7 @@
     
     $user_lambda = function ($f) { return [ 'user' => $f ]; };
     $post_lambda = function ($p) { 
-        return [ 'post' => $p, 'group' => $p->group()->first(), 'user' => $p->user()->first() ]; 
+        return [ 'post' => $p, 'group' => $p->group()->first() ]; 
     };
 @endphp
 
