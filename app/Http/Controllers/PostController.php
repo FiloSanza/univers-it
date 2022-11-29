@@ -14,14 +14,15 @@ class PostController extends Controller
     /**
      * Show the form for creating a new post.
      *
-     * @param int $group_id of the group
+     * @param string $name of the group
      * @return \Illuminate\View\View
      */
-    public function create($group_id)
+    public function create(string $name)
     {
-        Validator::validate(['id' => $group_id], [
-            'id' => 'required|int|exists:groups']);
-        $group = Group::where('id', $group_id)->first();
+        Validator::validate(['name' => $name], [
+            'name' => Group::VALIDATION_RULES['name'].'|exists:groups'
+        ]);
+        $group = Group::where('name', $name)->first();
         return view('posts.create-post', ['group' => $group]);
     }
 
