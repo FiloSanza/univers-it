@@ -1,6 +1,6 @@
 {{-- 
 
-Items must be an array like the one below:
+Items must be an eloquent collection like the one below:
 
 $items = [
     [ 'group' => $group, 'user' => $user ],
@@ -15,7 +15,7 @@ each element is a list item, which is represented by an array, as a key the name
     'itemtemplate',
     'items' => [],
     'ordered' => false,
-    'emptytemplate' => 'components.list.default-empty'
+    'emptymsg' => "Nothing to see here."
 ])
 
 @if($ordered)
@@ -23,7 +23,7 @@ each element is a list item, which is represented by an array, as a key the name
 @else
 <ol>
 @endif
-    @includeWhen(empty($items), $emptytemplate)
+    @includeWhen($items->isEmpty(), 'components.list.empty', [ 'value' => $emptymsg ])
     @foreach ($items as $item)
         @include('components.list.item', [ 'template' => $itemtemplate, 'params' => $item ])
     @endforeach
