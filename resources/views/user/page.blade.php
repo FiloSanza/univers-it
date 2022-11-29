@@ -3,6 +3,8 @@
     $already_followed = $user->followers()->where(['users.id' => Auth::id()])->first();
     $followers = $user->followers()->get();
     $follows = $user->follows()->get();
+    
+    $list_lambda = function ($f) { return [ 'user' => $f ]; }
 @endphp
 
 <x-app-layout>
@@ -21,10 +23,10 @@
     
     <br>
     <h3> Followers </h3>
-    <x-users.list :userlist="$followers" />
-
+    <x-list.list itemtemplate='components.users.small' :items="$followers->map($list_lambda)" />
+    
     <br>
     <h3> Follows </h3>
-    <x-users.list :userlist="$follows" />
+    <x-list.list itemtemplate='components.users.small' :items="$followers->map($list_lambda)" />
 
 </x-app-layout>

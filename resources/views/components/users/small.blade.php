@@ -1,0 +1,3 @@
+@props([ 'user' ])
+
+{{ $user->name }}
