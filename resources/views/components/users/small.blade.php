@@ -1,3 +1,3 @@
 @props([ 'user' ])
 
-{{ $user->name }}
+<a href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }} </a>
