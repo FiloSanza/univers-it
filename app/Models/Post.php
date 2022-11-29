@@ -36,4 +36,16 @@ class Post extends Model
     public function comments() {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * All the validation rule that the HTTP request needs to pass.   
+     * 
+     * @var array<string,string>
+     */
+    public const VALIDATION_RULES = [
+        'title' => 'required|string|max:255',
+        'content' => 'required|string|max:500',
+        'group_id' => 'required|int|exists:groups,id'
+    ];
+
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,10 @@ Route::middleware('auth')->group(function () {
     // Image routes
     Route::post('/image', [ImageController::class, 'store'])->name('image.store');
 
+    // Post routes
+    Route::get('/create-post/{group_id}', [PostController::class, 'create'])->name('post.create');
+    Route::post('/create-post', [PostController::class, 'store'])->name('post.store');
+
     // FollowEdge routes
     Route::post('/follow', [FollowEdgeController::class, 'store'])->name('follow');
     Route::post('/unfollow', [FollowEdgeController::class, 'delete'])->name('unfollow');
@@ -51,6 +56,9 @@ Route::get('/user/{username}', [UserPageController::class, 'show'])->name('userp
 
 // Group routes
 Route::get('/group/{name}', [GroupController::class, 'show'])->name('group.show');
+
+// Post routes
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
 // Image routes
 Route::get('/image/{id}', [ImageController::class, 'get'])->name('image.get');
