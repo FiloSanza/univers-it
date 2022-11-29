@@ -3,8 +3,12 @@
     $already_followed = $user->followers()->where(['users.id' => Auth::id()])->first();
     $followers = $user->followers()->get();
     $follows = $user->follows()->get();
+    $posts = $user->posts()->get();
     
-    $list_lambda = function ($f) { return [ 'user' => $f ]; }
+    $user_lambda = function ($f) { return [ 'user' => $f ]; };
+    $post_lambda = function ($p) { 
+        return [ 'post' => $p, 'group' => $p->group()->first(), 'user' => $p->user()->first() ]; 
+    };
 @endphp
 
 <x-app-layout>
@@ -23,10 +27,16 @@
     
     <br>
     <h3> Followers </h3>
-    <x-list.list itemtemplate='components.users.small' :items="$followers->map($list_lambda)" />
+    <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
     
     <br>
     <h3> Follows </h3>
-    <x-list.list itemtemplate='components.users.small' :items="$followers->map($list_lambda)" />
+    <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
+        
+    <br>
+    <h3> POSTS </h3>
+    <x-list.list itemtemplate='components.posts.small' :items="$posts->map($post_lambda)" />
+
+
 
 </x-app-layout>
