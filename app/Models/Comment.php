@@ -12,19 +12,19 @@ class Comment extends Model
     /**
      * Return the post this comment belongs to.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function post() {
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Post::class);
     }
 
     /**
      * Return the user that posted the comment.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**

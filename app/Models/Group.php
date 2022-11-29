@@ -13,10 +13,19 @@ class Group extends Model
     /**
      * Returns the user that created the post.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Returns all the posts in the group.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts() {
+        return $this->hasMany(Post::class);
     }
 
     /**
