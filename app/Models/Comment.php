@@ -27,4 +27,13 @@ class Comment extends Model
         return $this->hasOne(User::class);
     }
 
+    /**
+     * All the validation rule that the HTTP request needs to pass.
+     * 
+     * @var array<string,string>
+     */
+    public const VALIDATION_RULES = [
+        'content' => 'required|string|max:255',
+        'post_id' => 'required|int|exists:comments,id'
+    ];
 }
