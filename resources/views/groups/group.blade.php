@@ -1,9 +1,12 @@
 @php
     /** @var $group '\App\Models\Group' */
+    $posts = $group->posts()->get();
+    $list_lambda = function ($p) { 
+        return [ 'post' => $p, 'user' => $p->user()->first() ]; 
+    };
 @endphp
 
 <x-app-layout>
-    @if($group)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $group->name }}
@@ -11,5 +14,16 @@
     </x-slot>
 
     <p> {{ $group->description }} </p>
-    @endif
+
+    <br>
+    
+    <a href="{{ route('post.create', $group->name) }}">
+        Post
+    </a>
+    
+    <br>
+
+    <h3> POSTS </h3>
+    <x-list.list itemtemplate='components.posts.small' :items="$posts->map($list_lambda)" />
+
 </x-app-layout>
