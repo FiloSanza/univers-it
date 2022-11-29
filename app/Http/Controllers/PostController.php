@@ -15,7 +15,7 @@ class PostController extends Controller
      * Show the form for creating a new post.
      *
      * @param int $group_id of the group
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create($group_id)
     {
