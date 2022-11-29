@@ -45,7 +45,7 @@ class GroupController extends Controller
      * Display the specified resource.
      *
      * @param string $id
-     * @return \Illuminate\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(string $name)
     {
