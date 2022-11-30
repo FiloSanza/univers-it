@@ -6,10 +6,6 @@
 --}}
 
 <div>
-    @if($user)
-        <small><a href="{{ route('userpage.show', $user) }}"> {{ $user->name }}: </a></small>
-    @endif
-    @if($content)
-        <small> {{ $content }} </a></small>
-    @endif
+    <small><a href="{{ route('userpage.show', $user) }}"> {{ $user->name }}: </a></small>
+    <small> {{ $content }} </a></small>
 </div>
