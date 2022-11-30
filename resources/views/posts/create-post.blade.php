@@ -36,7 +36,7 @@
             class="block mt-1 w-full" 
             placeholder="Insert the post's content..."
             required/>
-        <input type="hidden" name="group_id" value="{{ $group->id}}" />
+        <input type="hidden" name="group_id" value="{{ $group->id }}" />
         <x-primary-button>
             Confirm
         </x-primary-button>
