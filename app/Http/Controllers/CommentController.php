@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created comment in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -26,7 +26,6 @@ class CommentController extends Controller
 
         $comment->save();
 
-
-        return redirect()->route('posts.show', $request->post_id);
+        return redirect()->route('post.show', $request->post_id);
     }
 }

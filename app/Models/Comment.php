@@ -34,6 +34,6 @@ class Comment extends Model
      */
     public const VALIDATION_RULES = [
         'content' => 'required|string|max:255',
-        'post_id' => 'required|int|exists:comments,id'
+        'post_id' => 'required|int|exists:posts,id'
     ];
 }
