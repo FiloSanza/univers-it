@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ImageController;
@@ -49,6 +50,10 @@ Route::middleware('auth')->group(function () {
     // FollowEdge routes
     Route::post('/follow', [FollowEdgeController::class, 'store'])->name('follow');
     Route::post('/unfollow', [FollowEdgeController::class, 'delete'])->name('unfollow');
+
+    // Comment routes
+    Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');
+
 });
 
 // User page routes

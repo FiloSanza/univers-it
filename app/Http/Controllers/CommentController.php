@@ -27,6 +27,6 @@ class CommentController extends Controller
         $comment->save();
 
 
-        return redirect()->route('posts.show', $request->post_id);
+        return redirect()->route('post.show', $request->post_id);
     }
 }
