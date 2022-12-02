@@ -1,8 +1,6 @@
 {{-- 
     This is the template used to show the search results.
-    The search results include:
-        - users
-        - posts
+    This page will show users and groups which names contains a specific substring.
 --}}
 
 @php
@@ -20,7 +18,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            SEARCH RESULTS
+            SEARCH RESULTS FOR '{{ $substring }}'
         </h2>
     </x-slot>
 
