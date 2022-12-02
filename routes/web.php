@@ -7,6 +7,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,5 +68,8 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
 // Image routes
 Route::get('/image/{id}', [ImageController::class, 'get'])->name('image.get');
+
+// Search routes
+Route::get('/search', [SearchController::class, 'show'])->name('search.show');
 
 require __DIR__.'/auth.php';
