@@ -6,6 +6,6 @@
 --}}
 
 <div>
-    <small><a href="{{ route('userpage.show', $user) }}"> {{ $user->name }}: </a></small>
+    <small><a href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }}: </a></small>
     <small> {{ $content }} </a></small>
 </div>

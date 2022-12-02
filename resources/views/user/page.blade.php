@@ -31,7 +31,7 @@
     
     <br>
     <h3> Follows </h3>
-    <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
+    <x-list.list itemtemplate='components.users.small' :items="$follows->map($user_lambda)" />
         
     <br>
     <h3> POSTS </h3>
