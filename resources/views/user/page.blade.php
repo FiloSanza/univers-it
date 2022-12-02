@@ -12,25 +12,33 @@
 @endphp
 
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $user->name }}
-        </h2>
-    </x-slot> --}}
     <div class="max-w-5xl mx-auto">
         <div class="grid grid-flow-col">
-            <div class="bg-blue-700"></div> {{-- Img --}}
-            <div class="bg-red-400 col-span-3">
-                <p class="font-bold text-2xl"> {{ $user->name }} </p>
-                <p class="font-semibold"> Università di Bologna </p>
+            <div class="bg-yellow-300">
+                <img src="{{ route('image.get', $user->propic) }}" />
             </div>
-            <div class="bg-green-300 text-right grid grid-rows-2">
-                <div>
-                    <p> {{count($posts)}} <small>Posts</small>  </p>
-                    <p> {{count($followers)}} <small>Followers</small> </p>
-                    <p> {{count($follows)}} <small>Following</small> </p>
+            <div class="col-span-3 flex items-center justify-center">
+                <div class="flex-none">
+                    <div class="font-bold text-2xl"> {{ $user->name }} </div>
+                    <div class="font-semibold"> Università di Bologna </div>
                 </div>
-                <div>
+            </div>
+            <div class=" text-right grid grid-rows-2">
+                <div class="m-auto flex items-center justify-center">
+                    <div class="text-center float-left m-1">
+                        <p> {{ count($posts) }} </p> 
+                        <small>Posts</small>
+                    </div>
+                    <div class="text-center float-left m-1">
+                        <p> {{ count($followers) }} </p> 
+                        <small>Followers</small>
+                    </div>
+                    <div class="text-center float-left m-1">
+                        <p> {{ count($follows) }} </p> 
+                        <small>Following</small>
+                    </div>
+                </div>
+                <div class="text-center flex items-center justify-center">
                     @unless(Auth::id() == $user->id)
                         <x-users.follow-button :userid="$user->id" :isfollowed="$already_followed" />
                     @endunless
@@ -47,7 +55,7 @@
     <p> Follows: {{ count($follows) }} </p>
     
     <br>
-    <h3 class="bg-blue-300"> Followers </h3>
+    <h3 class=""> Followers </h3>
     <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
     
     <br>
