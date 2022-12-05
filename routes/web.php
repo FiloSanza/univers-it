@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 
     // Comment routes
     Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');
-
+    
 });
 
 // User page routes
@@ -70,6 +70,6 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 Route::get('/image/{id}', [ImageController::class, 'get'])->name('image.get');
 
 // Search routes
-Route::get('/search', [SearchController::class, 'show'])->name('search.show');
+Route::get('/search', SearchController::class)->name('search.show');
 
 require __DIR__.'/auth.php';
