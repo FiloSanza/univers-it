@@ -87,4 +87,18 @@ class User extends Authenticatable
             'followed_id'       // Foreign key pointing to the followed user model.
         );
     }
+
+    /**
+     * Return all the groups followed by this user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followed_groups() {
+        return $this->belongsToMany(
+            User::class,
+            GroupFollowEdge::class,
+            'user_id',
+            'group_id'
+        );
+    }
 }
