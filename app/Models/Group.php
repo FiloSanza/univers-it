@@ -29,15 +29,6 @@ class Group extends Model
     }
 
     /**
-     * Returns the group's image.
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function image() {
-        return $this->hasOne(Image::class);
-    }
-
-    /**
      * All the validation rule that the HTTP request needs to pass.
      * 
      * @var array<string,string>
