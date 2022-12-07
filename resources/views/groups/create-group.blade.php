@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <form action="/create-group" method="post">
+    <form action="/create-group" method="post" enctype="multipart/form-data">
         @csrf
         <x-input-label for="name">
             Group Name
@@ -27,8 +27,13 @@
             class="block mt-1 w-full" 
             placeholder="Insert a short description..."
             required/>
+        <x-input-label for="image">
+            Group Image
+        </x-input-label>
+        <input type="file" name="image" id="image" required />
         <x-primary-button>
             Confirm
         </x-primary-button>
+
     </form>
 </x-app-layout>

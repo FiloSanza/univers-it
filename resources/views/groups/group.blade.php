@@ -7,11 +7,11 @@
 @endphp
 
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $group->name }}
-        </h2>
-    </x-slot>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ $group->name }}
+    </h2>
+
+    <img src="{{ route('image.get', $group->image_id) }}" />
 
     <p> {{ $group->description }} </p>
 

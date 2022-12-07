@@ -1,0 +1,3 @@
+public/uploads/imgs/*
+!public/uploads/imgs/default-user.png
+!.gitignore

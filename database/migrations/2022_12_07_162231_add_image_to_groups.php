@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('groups', function (Blueprint $table) {
-            $table->foreignId('image')
+            $table->foreignId('image_id')
                 ->constrained('images')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
@@ -30,7 +30,7 @@ return new class extends Migration
     {
         Schema::table('groups', function (Blueprint $table) {
             $table->dropForeign('groups_image_foreign');
-            $table->dropColumn('image');
+            $table->dropColumn('image_id');
         });
     }
 };
