@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->string('id', 255)
-                  ->unique()
-                  ->primary()
-                  ->comment('Hash of the name of the stored image.');
-            $table->string('name', 100);
-            $table->string('storage_path');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('propic')
+                ->constrained('images')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 
@@ -31,6 +28,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('propic');
+        });
     }
 };
