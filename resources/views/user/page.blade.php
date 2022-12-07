@@ -12,19 +12,17 @@
 @endphp
 
 <x-app-layout>
-    <div class="max-w-5xl mx-auto">
-        <div class="grid grid-flow-col">
-            <div class="bg-yellow-300">
-                <img src="{{ route('image.get', $user->propic) }}" />
+    <div class="mx-auto lg:max-w-5xl">
+        <div class="flex flex-col items-center lg:flex-row">
+            <div class="lg:w-1/5">
+                <img src="{{ route('image.get', $user->propic) }}" class="mx-auto w-24 h24" />
             </div>
-            <div class="col-span-3 flex items-center justify-center">
-                <div class="flex-none">
-                    <div class="font-bold text-2xl"> {{ $user->name }} </div>
-                    <div class="font-semibold"> Università di Bologna </div>
-                </div>
+            <div class="text-center lg:w-3/5">
+                <div class="font-bold text-2xl"> {{ $user->name }} </div>
+                <div class="font-semibold"> Università di Bologna </div>
             </div>
-            <div class=" text-right grid grid-rows-2">
-                <div class="m-auto flex items-center justify-center">
+            <div class="flex flex-col lg:w-1/5 lg:justify-end">
+                <div class="m-auto flex">
                     <div class="text-center float-left m-1">
                         <p> {{ count($posts) }} </p> 
                         <small>Posts</small>
@@ -38,11 +36,11 @@
                         <small>Following</small>
                     </div>
                 </div>
-                <div class="text-center flex items-center justify-center">
-                    @unless(Auth::id() == $user->id)
-                        <x-users.follow-button :userid="$user->id" :isfollowed="$already_followed" />
-                    @endunless
+                @unless(Auth::id() == $user->id)
+                <div class="m-auto h-10 grid place-items-center">
+                    <x-users.follow-button :userid="$user->id" :isfollowed="$already_followed" />
                 </div>
+                @endunless
             </div>
         </div>
     </div>
