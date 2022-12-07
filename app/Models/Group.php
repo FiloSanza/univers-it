@@ -29,12 +29,22 @@ class Group extends Model
     }
 
     /**
+     * Returns the group's image.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function image() {
+        return $this->hasOne(Image::class);
+    }
+
+    /**
      * All the validation rule that the HTTP request needs to pass.
      * 
      * @var array<string,string>
      */
     public const VALIDATION_RULES = [
         'name' => 'required|string|max:255',
-        'description' => 'required|string|max:500'
+        'description' => 'required|string|max:500',
+        // TODO: 'image' => 'required|image|size:2048|mimes:jpeg,jpg,png,gif'           // Max 2Mb
     ];
 }
