@@ -14,11 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->string('id', 255)
-                  ->unique()
-                  ->primary()
-                  ->comment('Hash of the name of the stored image.');
-            $table->string('name', 100);
+            $table->id();
             $table->string('storage_path');
             $table->timestamps();
         });
