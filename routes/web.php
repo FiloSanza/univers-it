@@ -7,6 +7,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,7 +55,7 @@ Route::middleware('auth')->group(function () {
 
     // Comment routes
     Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');
-
+    
 });
 
 // User page routes
@@ -68,5 +69,8 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
 // Image routes
 Route::get('/image/{id}', [ImageController::class, 'get'])->name('image.get');
+
+// Search routes
+Route::get('/search', SearchController::class)->name('search.show');
 
 require __DIR__.'/auth.php';

@@ -18,6 +18,25 @@
                 </div>
             </div>
 
+            <div>
+                <form id="search-form" action="/search" method="get">
+                    <x-input-label for="name">
+                        Search
+                    </x-input-label>
+                    <x-text-input 
+                        id="name" 
+                        name="name"
+                        type="text"
+                        class="block mt-1 w-full"
+                        required
+                        />
+
+                    <x-primary-button>
+                        Confirm
+                    </x-primary-button>
+                </form>    
+            </div>
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
