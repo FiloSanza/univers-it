@@ -18,7 +18,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'storage_path' => ImageController::IMG_LOCAL_STORAGE_PATH.'/default-user.png'
+            'storage_path' => 'default-user.png'
         ];
     }
 }
