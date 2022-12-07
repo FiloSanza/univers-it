@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
-    private const IMG_LOCAL_STORAGE_PATH = 'pubilc/uploads/imgs/'; 
+    private const IMG_LOCAL_STORAGE_PATH = 'public/uploads/imgs/'; 
 
     /**
      * Saves an image in the storage.
