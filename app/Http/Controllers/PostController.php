@@ -34,15 +34,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
         $request->validate(Post::VALIDATION_RULES);
         
         $post = new Post();
-        $user_id = Auth::id();
-        $post->user_id = $user_id;
-        
-        foreach (Post::VALIDATION_RULES as $field => $_) {
-            $post->$field = $request->$field;
+
+        $post->user_id = Auth::id();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->group_id = $request->group_id;
+
+        if ($request->image) {
+            $post->image_id = ImageController::persist($request->image);   
         }
 
         $post->save();

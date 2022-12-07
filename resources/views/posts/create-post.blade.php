@@ -9,7 +9,7 @@
         </h2>
     </x-slot>
     
-    <form action="/create-post" method="post">
+    <form action="/create-post" method="post" enctype="multipart/form-data">
         @csrf
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -36,6 +36,10 @@
             class="block mt-1 w-full" 
             placeholder="Insert the post's content..."
             required/>
+        <x-input-label for="image">
+            Image (Optional)
+        </x-input-label>
+        <input type="file" name="image" id="image" />
         <input type="hidden" name="group_id" value="{{ $group->id }}" />
         <x-primary-button>
             Confirm

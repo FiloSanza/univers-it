@@ -35,6 +35,10 @@
 
     <br/>
 
+    @if($post->image_id)
+        <img src='{{ route('image.get', $post->image_id) }}'/>
+    @endif
+
     <h3> COMMENTS({{ $comments->count() }}) </h3>
 
     <form action="/create-comment" method="post">

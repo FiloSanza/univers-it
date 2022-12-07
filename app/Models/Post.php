@@ -45,7 +45,8 @@ class Post extends Model
     public const VALIDATION_RULES = [
         'title' => 'required|string|max:255',
         'content' => 'required|string|max:500',
-        'group_id' => 'required|int|exists:groups,id'
+        'group_id' => 'required|int|exists:groups,id',
+        // TODO: 'image' => 'required|image|size:2048|mimes:jpeg,jpg,png,gif'           // Max 2Mb
     ];
 
 }
