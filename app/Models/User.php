@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\GroupFollowEdgeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -91,13 +92,15 @@ class User extends Authenticatable
     /**
      * Return all the groups followed by this user.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
      */
     public function followed_groups() {
-        return $this->belongsToMany(
-            User::class,
+        return $this->hasManyThrough(
+            Group::class,
             GroupFollowEdge::class,
             'user_id',
+            'id',
+            'id',
             'group_id'
         );
     }

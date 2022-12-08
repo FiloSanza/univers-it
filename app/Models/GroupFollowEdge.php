@@ -34,6 +34,6 @@ class GroupFollowEdge extends Model
      * @var array<string,string>
      */
     public const VALIDATION_RULES = [
-        'group' => 'required|int|exists:groups,id'
+        'group_id' => 'required|int|exists:groups,id'
     ];
 }
