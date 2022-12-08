@@ -63,10 +63,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');
 
     // ReactionImages routes
-    Route::post('/create-reaction', [ReactionImageController::class])->name('reaction.store');
+    Route::post('/create-reaction', [ReactionImageController::class, '__invoke'])->name('reaction.store');
     
     // PostReaction routes
-    Route::post('/post/react', [PostReaction::class])->name('post-reaction.store');
+    Route::post('/post/react', [PostReaction::class, '__invoke'])->name('post-reaction.store');
 
 });
 
