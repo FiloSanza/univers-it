@@ -7,7 +7,9 @@ use App\Http\Controllers\GroupFollowEdgeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReactionImageController;
 use App\Http\Controllers\UserPageController;
+use App\Models\PostReaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +61,12 @@ Route::middleware('auth')->group(function () {
 
     // Comment routes
     Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');
+
+    // ReactionImages routes
+    Route::post('/create-reaction', [ReactionImageController::class])->name('reaction.store');
+    
+    // PostReaction routes
+    Route::post('/post/react', [PostReaction::class])->name('post-reaction.store');
 
 });
 
