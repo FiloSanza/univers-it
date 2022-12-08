@@ -1,6 +1,10 @@
 @php
     /** @var $group '\App\Models\Group' */
     $posts = $group->posts()->get();
+    $already_followed = Auth::user()
+        ->followed_groups()
+        ->where('group_id', $group->id)
+        ->first();
     $list_lambda = function ($p) { 
         return [ 'post' => $p, 'user' => $p->user()->first() ]; 
     };
@@ -16,6 +20,8 @@
     <p> {{ $group->description }} </p>
 
     <br>
+
+    <x-follow-button :groupid="$group->id" :isfollowed="$already_followed"/>
     
     <a href="{{ route('post.create', $group->name) }}">
         Post

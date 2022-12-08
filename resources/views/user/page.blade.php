@@ -38,7 +38,7 @@
                 </div>
                 @unless(Auth::id() == $user->id)
                 <div class="m-auto h-10 grid place-items-center">
-                    <x-users.follow-button :userid="$user->id" :isfollowed="$already_followed" />
+                    <x-follow-button :userid="$user->id" :isfollowed="$already_followed" />
                 </div>
                 @endunless
             </div>
