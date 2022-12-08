@@ -26,8 +26,10 @@ class GroupFollowEdgeController extends Controller
         }
 
         $edge = new GroupFollowEdge();
+        
         $edge->user_id = Auth::id();
         $edge->group_id = $group_id;
+        
         $edge->save();
 
         return Redirect::back()->with('Success.');

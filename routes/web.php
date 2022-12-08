@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GroupFollowEdgeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -49,8 +50,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/create-post', [PostController::class, 'store'])->name('post.store');
 
     // FollowEdge routes
-    Route::post('/follow', [FollowEdgeController::class, 'store'])->name('follow');
-    Route::post('/unfollow', [FollowEdgeController::class, 'delete'])->name('unfollow');
+    Route::post('/user/follow', [FollowEdgeController::class, 'store'])->name('user.follow');
+    Route::post('/user/unfollow', [FollowEdgeController::class, 'delete'])->name('user.unfollow');
+
+    // FollowEdge routes
+    Route::post('/group/follow', [GroupFollowEdgeController::class, 'store'])->name('group.follow');
+    Route::post('/group/unfollow', [GroupFollowEdgeController::class, 'delete'])->name('group.unfollow');
 
     // Comment routes
     Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');

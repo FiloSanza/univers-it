@@ -25,7 +25,7 @@ class FollowTest extends TestCaseWithSeeder
         Sanctum::actingAs($user);
 
         $this->assertErrorsInPostRequest(
-            route('follow'),
+            route('user.follow'),
             [ 'followed_id' => $user->id ],
             [ 'error' => 'You cannot follow yourself.' ]
         );
@@ -45,14 +45,14 @@ class FollowTest extends TestCaseWithSeeder
         Sanctum::actingAs($user_a);
 
         $this->assertNoErrorsInPostRequest(
-            route('follow'),
+            route('user.follow'),
             [ 'followed_id' => $user_b->id ]
         );
 
         $this->assertNotNull($this->getEdge($user_a->id, $user_b->id));
 
         $this->assertErrorsInPostRequest(
-            route('follow'),
+            route('user.follow'),
             [ 'followed_id' => $user_b->id ],
             [ 'error' => 'You already follow this user.' ]
         );
@@ -72,7 +72,7 @@ class FollowTest extends TestCaseWithSeeder
         Sanctum::actingAs($user_a);
 
         $this->assertNoErrorsInPostRequest(
-            route('follow'),
+            route('user.follow'),
             [ 'followed_id' => $user_b->id ]
         );
 
@@ -91,7 +91,7 @@ class FollowTest extends TestCaseWithSeeder
         Sanctum::actingAs($user_a);
 
         $this->assertErrorsInPostRequest(
-            route('unfollow'), 
+            route('user.unfollow'), 
             ['followed_id' => $user_b->id], 
             [ 'error' => 'You did not follow this user.' ]
         );
@@ -109,14 +109,14 @@ class FollowTest extends TestCaseWithSeeder
         Sanctum::actingAs($user_a);
 
         $this->assertNoErrorsInPostRequest(
-            route('follow'),
+            route('user.follow'),
             [ 'followed_id' => $user_b->id ]
         );
 
         $this->assertNotNull($this->getEdge($user_a->id, $user_b->id));
 
         $this->assertNoErrorsInPostRequest(
-            route('unfollow'),
+            route('user.unfollow'),
             [ 'followed_id' => $user_b->id ]
         );
 
@@ -145,7 +145,7 @@ class FollowTest extends TestCaseWithSeeder
 
         $params = $user_id ? [ 'followed_id' => $user_id ] : [];
         $this->assertErrorsInPostRequest(
-            route('follow'),
+            route('user.follow'),
             $params
         );
     }
