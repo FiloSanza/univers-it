@@ -1,3 +1,5 @@
 public/uploads/imgs/*
 !public/uploads/imgs/default-user.png
+!public/uploads/imgs/shaq.png
+!public/uploads/imgs/mike.jpg
 !.gitignore
