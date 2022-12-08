@@ -18,7 +18,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'storage_path' => 'default-user.png'
+            'storage_path' => fake()->filePath(),
         ];
     }
 }
