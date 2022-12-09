@@ -29,11 +29,15 @@
                     </div>
                     <div 
                         class="text-center float-left m-1"
-                        onclick="(e) => e.preventDefault(); document.dispatchEvent(new Event('open-modal', {'detail': 'followers-modal'}));" >
+                        onclick="document.getElementsByName('followers-modal')[0].style.display = 'block'"
+                    >
                         <p> {{ count($followers) }} </p> 
                         <small>Followers</small>
                     </div>
-                    <div class="text-center float-left m-1">
+                    <div 
+                        class="text-center float-left m-1"
+                        onclick="document.getElementsByName('following-modal')[0].style.display = 'block'"
+                    >
                         <p> {{ count($follows) }} </p> 
                         <small>Following</small>
                     </div>
@@ -46,6 +50,20 @@
             </div>
         </div>
     </header>
+
+    <x-popup name="followers-modal">
+        <x-slot:header>
+            Followers
+        </x-slot:header>
+        <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
+    </x-popup>
+
+    <x-popup name="following-modal">
+        <x-slot:header>
+            Following
+        </x-slot:header>
+        <x-list.list itemtemplate='components.users.small' :items="$follows->map($user_lambda)" />
+    </x-popup>
 
     <section class="mx-auto mt-5 p-5 lg:w-4/5">
         <div class="w-full text-center text-2xl">
