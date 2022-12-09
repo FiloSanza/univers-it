@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
@@ -26,9 +27,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 
 // Insert here all the routes that need to be authenticated.
 Route::middleware('auth')->group(function () {
