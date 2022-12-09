@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use \App\Models\Post;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PHPUnit\TextUI\XmlConfiguration\Groups;
+use Illuminate\Database\Eloquent\Collection;
 
 class DashboardController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Return the user's feed.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         if (!Auth::check()) {
             $feed = Post::inRandomOrder()->limit(20)->get();
