@@ -27,11 +27,17 @@
                         <p> {{ count($posts) }} </p> 
                         <small>Posts</small>
                     </div>
-                    <div class="text-center float-left m-1">
+                    <div 
+                        class="text-center float-left m-1"
+                        onclick="document.getElementsByName('followers-modal')[0].style.display = 'block'"
+                    >
                         <p> {{ count($followers) }} </p> 
                         <small>Followers</small>
                     </div>
-                    <div class="text-center float-left m-1">
+                    <div 
+                        class="text-center float-left m-1"
+                        onclick="document.getElementsByName('following-modal')[0].style.display = 'block'"
+                    >
                         <p> {{ count($follows) }} </p> 
                         <small>Following</small>
                     </div>
@@ -45,22 +51,21 @@
         </div>
     </div>
 
-    {{-- @unless(Auth::id() == $user->id)
-        <x-users.follow-button :userid="$user->id" :isfollowed="$already_followed" />
-    @endunless
-    
-    <p> Followers: {{ count($followers) }} </p>
-    <p> Follows: {{ count($follows) }} </p>
-    
-    <br>
-    <h3 class=""> Followers </h3>
-    <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
-    
-    <br>
-    <h3> Follows </h3>
-    <x-list.list itemtemplate='components.users.small' :items="$follows->map($user_lambda)" />
+    <x-popup name="followers-modal">
+        <x-slot:header>
+            Followers
+        </x-slot:header>
+        <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
+    </x-popup>
+
+    <x-popup name="following-modal">
+        <x-slot:header>
+            Following
+        </x-slot:header>
+        <x-list.list itemtemplate='components.users.small' :items="$follows->map($user_lambda)" />
+    </x-popup>
         
-    <br>
+    {{-- <br>
     <h3> POSTS </h3>
     <x-list.list itemtemplate='components.posts.small' :items="$posts->map($post_lambda)" /> --}}
 
