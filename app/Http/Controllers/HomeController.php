@@ -6,7 +6,7 @@ use \App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 
-class DashboardController extends Controller
+class HomeController extends Controller
 {
     /**
      * Return the user's feed.
@@ -45,6 +45,6 @@ class DashboardController extends Controller
             return strtotime($post->created_at);
         });
 
-        return view('dashboard', ['feed' => $sorted_feed]);
+        return view('home.home', ['feed' => $sorted_feed]);
     }
 }
