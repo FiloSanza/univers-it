@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
@@ -22,9 +23,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Home Route
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
