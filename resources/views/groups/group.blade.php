@@ -1,6 +1,7 @@
 @php
     /** @var $group '\App\Models\Group' */
     $posts = $group->posts()->get();
+    $posts = Helper::sortByMostRecent($posts);
     $already_followed = Auth::user()
         ->followed_groups()
         ->where('group_id', $group->id)
