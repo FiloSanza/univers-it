@@ -6,7 +6,7 @@
         ->where('group_id', $group->id)
         ->first();
     $list_lambda = function ($p) { 
-        return [ 'post' => $p, 'user' => $p->user()->first() ]; 
+        return [ 'post' => $p, 'user' => $p->user()->first(), 'group' => $p->group()->first() ]; 
     };
 @endphp
 
