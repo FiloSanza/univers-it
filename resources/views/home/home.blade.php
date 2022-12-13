@@ -1,5 +1,6 @@
 @php
     /** @var $feed @mixed */
+    $feed = Helper::sortByMostRecent($feed);
     $list_lambda = function ($p) { 
         return [ 'post' => $p ];
     };

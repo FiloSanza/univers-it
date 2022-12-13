@@ -40,11 +40,6 @@ class HomeController extends Controller
             $feed->unique();
         }
 
-        $sorted_feed = $feed->sortByDesc(function($post)
-        {
-            return strtotime($post->created_at);
-        });
-
-        return view('home.home', ['feed' => $sorted_feed]);
+        return view('home.home', ['feed' => $feed]);
     }
 }

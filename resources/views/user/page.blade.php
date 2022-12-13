@@ -4,7 +4,7 @@
     $followers = $user->followers()->get();
     $follows = $user->follows()->get();
     $posts = $user->posts()->get();
-    
+    $posts = Helper::sortByMostRecent($posts);
     $user_lambda = function ($f) { return [ 'user' => $f ]; };
     $post_lambda = function ($p) { 
         return [ 'post' => $p, 'group' => $p->group()->first(), 'user' => $p->user()->first() ]; 
