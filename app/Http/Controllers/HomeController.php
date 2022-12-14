@@ -11,7 +11,7 @@ class HomeController extends Controller
     /**
      * Return the user's feed.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function __invoke()
     {
