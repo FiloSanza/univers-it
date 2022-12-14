@@ -1,11 +1,11 @@
 @php
     /** @var $user '\App\Models\User' */
-    $already_followed = $user->followers()->where(['users.id' => Auth::id()])->first();
+    $already_followed = Helper::isAFollowerOfB(Auth::user(), $user);
     $followers = $user->followers()->get();
     $follows = $user->follows()->get();
     $posts = $user->posts()->get();
     $posts = Helper::sortByMostRecent($posts);
-    $user_lambda = function ($f) { return [ 'user' => $f ]; };
+    $user_lambda = function ($f) { return [ 'user' => $f, 'already_followed' => Helper::isAFollowerOfB(Auth::user(), $f) ]; };
     $post_lambda = function ($p) { 
         return [ 'post' => $p, 'group' => $p->group()->first(), 'user' => $p->user()->first() ]; 
     };
@@ -21,21 +21,21 @@
                 <div class="font-bold text-2xl"> {{ $user->name }} </div>
                 <div class="font-semibold"> Università di Bologna </div>
             </div>
-            <div class="flex flex-col lg:w-1/5 lg:justify-end">
+            <div class="flex flex-col lg:w-1/5">
                 <div class="m-auto flex">
-                    <div class="text-center float-left m-1">
+                    <div class="text-center m-1">
                         <p> {{ count($posts) }} </p> 
                         <small>Posts</small>
                     </div>
                     <div 
-                        class="text-center float-left m-1"
+                        class="text-center m-1"
                         onclick="document.getElementsByName('followers-modal')[0].style.display = 'block'"
                     >
                         <p> {{ count($followers) }} </p> 
                         <small>Followers</small>
                     </div>
                     <div 
-                        class="text-center float-left m-1"
+                        class="text-center m-1"
                         onclick="document.getElementsByName('following-modal')[0].style.display = 'block'"
                     >
                         <p> {{ count($follows) }} </p> 
