@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewCommentEvent;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,8 @@ class CommentController extends Controller
         }
 
         $comment->save();
+
+        event(new NewCommentEvent($comment));
 
         return redirect()->route('post.show', $request->post_id);
     }
