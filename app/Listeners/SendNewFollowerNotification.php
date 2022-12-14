@@ -27,8 +27,8 @@ class SendNewFollowerNotification
      */
     public function handle(NewFollowerEvent $event)
     {
-        $user = $event->user;
-        $follower = $event->follower;
+        $user = $event->edge->followed()->first();
+        $follower = $event->edge->follower()->first();
         $user->notify(new NewFollowerNotification($user, $follower));
     }
 }

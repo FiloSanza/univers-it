@@ -2,12 +2,9 @@
 
 namespace App\Events;
 
-use App\Models\User;
-use Illuminate\Broadcasting\Channel;
+use App\Models\FollowEdge;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -16,28 +13,20 @@ class NewFollowerEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * The user that started following.
+     * The newly created follow edge.
      * 
-     * @var \App\Models\User
+     * @var \App\Models\FollowEdge
      */
-    public $follower;
-
-    /**
-     * The user that is now being followed.
-     * 
-     * @var \App\Models\User
-     */
-    public $user;
+    public $edge;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $follower, User $user)
+    public function __construct(FollowEdge $follow_edge)
     {
-        $this->follower = $follower;
-        $this->user = $user;
+        $this->edge = $follow_edge;
     }
 
     /**
