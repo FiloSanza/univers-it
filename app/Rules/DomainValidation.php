@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Rule;
 class DomainValidation implements Rule
 {
     /**
-     * Determine if the email is an university's email.
+     * Determine if the email is a valid university's email.
      *
      * @param  string  $attribute
      * @param  mixed  $value
@@ -18,13 +18,13 @@ class DomainValidation implements Rule
     {
         $domain = explode('@', $value)[1];
 
-        $domains = University::select('domain')->get()->toArray();
-        $domains = array_map(fn($v) => array_values($v)[0], $domains);
+        $domains_array = University::select('domain')->get()->toArray();
+        $domains_array = array_map(fn($v) => array_values($v)[0], $domains_array);
         
-        if (!in_array($domain, $domains)) {
+        if (!in_array($domain, $domains_array)) {
             return False;
         }
-        
+
         return True;
     }
 
@@ -35,6 +35,6 @@ class DomainValidation implements Rule
      */
     public function message()
     {
-        return 'The email must be an university\'s email.';
+        return 'The email must be a valid university\'s email.';
     }
 }
