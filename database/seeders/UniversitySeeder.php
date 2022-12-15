@@ -15,8 +15,8 @@ class UniversitySeeder extends Seeder
     public function run()
     {
         $universities = [
-            ['name' => 'University of Bologna', 'domain' => '@studio.unibo.it'],
-            ['name' => 'University of Trento', 'domain' => '@studenti.unitn.it'],
+            ['name' => 'University of Bologna', 'domain' => 'studio.unibo.it'],
+            ['name' => 'University of Trento', 'domain' => 'studenti.unitn.it'],
         ];
 
         foreach($universities as $university){
