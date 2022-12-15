@@ -12,11 +12,13 @@
 @endphp
 
 <x-app-layout>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ $group->name }}
-    </h2>
+    <div class="w-full h-40 overflow-clip">
+        <img class="w-full h-auto" src="{{ route('image.get', $group->image_id) }}" />
+    </div>
 
-    <img src="{{ route('image.get', $group->image_id) }}" />
+    <h1 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ $group->name }}
+    </h1>
 
     <p> {{ $group->description }} </p>
 
