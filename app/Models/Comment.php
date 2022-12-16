@@ -28,12 +28,22 @@ class Comment extends Model
     }
 
     /**
+     * Return the parent comment if present.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parentComment() {
+        return $this->belongsTo(Comment::class);
+    }
+
+    /**
      * All the validation rule that the HTTP request needs to pass.
      * 
      * @var array<string,string>
      */
     public const VALIDATION_RULES = [
         'content' => 'required|string|max:255',
-        'post_id' => 'required|int|exists:posts,id'
+        'post_id' => 'required|int|exists:posts,id',
+        'reply_to' => 'nullable|int|exists:comments,id'
     ];
 }
