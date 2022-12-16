@@ -19,15 +19,17 @@
 @endphp
 
 <x-app-layout>
+    
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <small> Posted in <a href="{{ route('group.show', $group->name) }}"> {{ $group->name }} </a> by </small>
+        <div class="lg:flex">
+            <img src="{{ route('image.get', $user->propic) }}" class="w-6 h-6 rounded-full" />
+            <a href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }} </a> 
+        </div>
+        <h2 class="font-bold text-xl text-gray-800 leading-tight">
             {{ $post->title }}
         </h2>
-    </x-slot>
-    
-    <br/>
-    
-    <small> Posted in <a href="{{ route('group.show', $group->name) }}"> {{ $group->name }} </a> by <a href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }} </a> </small>
+    </x-slot>    
     
     <br/>
 
@@ -36,12 +38,16 @@
     <br/>
 
     @if($post->image_id)
-        <img src='{{ route('image.get', $post->image_id) }}'/>
+    <div class="border-b-2 border-gray-600 my-2">
+        <div class="mx-auto w-4/5">
+            <img class="max-w-full h-auto my-6" src='{{ route('image.get', $post->image_id) }}'/>
+        </div>
+    </div>
     @endif
 
     <h3> COMMENTS({{ $comments->count() }}) </h3>
 
-    <form action="/create-comment" method="post">
+    {{-- <form action="/create-comment" method="post">
         @csrf
         <x-input-label for="content">
             New Comment
@@ -59,7 +65,7 @@
             Confirm
         </x-primary-button>
 
-    </form>
+    </form> --}}
 
     <br/>
 

@@ -6,6 +6,9 @@
 --}}
 
 <div>
-    <small><a href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }}: </a></small>
-    <small> {{ $content }} </a></small>
+    <div class="lg:flex">
+        <img src="{{ route('image.get', $user->propic) }}" class="w-10 h-10 rounded-full mx-2" />
+        <a class="font-bold my-auto mx-1" href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }}: </a>
+        <a class="my-auto"> {{ $content }} </a> 
+    </div>
 </div>
