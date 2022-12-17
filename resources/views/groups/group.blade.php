@@ -2,10 +2,12 @@
     /** @var $group '\App\Models\Group' */
     $posts = $group->posts()->get();
     $posts = Helper::sortByMostRecent($posts);
-    $already_followed = Auth::user()
-        ->followed_groups()
-        ->where('group_id', $group->id)
-        ->first();
+    $already_followed = Auth::user() !== null 
+        ? Auth::user()
+            ->followed_groups()
+            ->where('group_id', $group->id)
+            ->first()
+        : false;
     $list_lambda = function ($p) { 
         return [ 'post' => $p, 'user' => $p->user()->first(), 'group' => $p->group()->first() ]; 
     };
@@ -22,18 +24,18 @@
             </h1>
             <p> {{ $group->description }} </p>
         </div>
-        <br class="flex flex-col lg:w-1/5">
-            <div>
+        <div class="flex flex-col lg:w-1/5 items-center">
+            @auth
                 <x-follow-button :groupid="$group->id" :isfollowed="$already_followed"/>
-                    <div class="mt-2">
-                        <a class="bg-blue-500 text-white rounded-xl px-12 py-0.5 hover:bg-white hover:text-blue-500 hover:border-2 hover:border-blue-500"
-                        href="{{ route('post.create', $group->name) }}" 
+                <div class="mt-2">
+                    <a class="bg-blue-500 text-white rounded-xl px-12 py-0.5 hover:bg-white hover:text-blue-500 hover:border-2 hover:border-blue-500"
+                        href="{{ route('post.create', $group->name) }}"
                         >
                         Post
-                        </a>
-                    </div> 
-            </div>
-        <br>
+                    </a>
+                </div> 
+            @endauth
+        </div>
     </div>
     <section class="mx-auto mt-5 p-5 lg:w-4/5">
         <div class="w-full text-center text-2xl">

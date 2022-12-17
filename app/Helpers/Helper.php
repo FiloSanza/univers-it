@@ -20,7 +20,11 @@ class Helper
      * @param User $user_b
      * @return boolean
      */
-    public static function isAFollowerOfB(User $user_a, User $user_b) {
+    public static function isAFollowerOfB(?User $user_a, ?User $user_b) {
+        if (is_null($user_a) || is_null($user_b)) {
+            return false;
+        }
+
         return $user_b->followers()->where(['users.id' => $user_a->id])->first() !== null;
     }
 }
