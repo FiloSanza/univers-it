@@ -16,7 +16,7 @@ class SearchController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $name = $request->name;
+        $name = $request->query("q");
 
         $results['users'] = User::query()
             ->where('name', 'LIKE', "%{$name}%")

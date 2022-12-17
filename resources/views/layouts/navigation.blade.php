@@ -17,25 +17,8 @@
                     </x-nav-link>
                 </div>
             </div>
-
-            {{-- <div>
-                <form id="search-form" action="/search" method="get">
-                    <x-input-label for="name">
-                        Search
-                    </x-input-label>
-                    <x-text-input 
-                        id="name" 
-                        name="name"
-                        type="text"
-                        class="block mt-1 w-full"
-                        required
-                        />
-
-                    <x-primary-button>
-                        Confirm
-                    </x-primary-button>
-                </form>    
-            </div> --}}
+            
+            <input type=text id="searchbar" name="searchbar" class="w-1/2 h-2/3 mx-auto my-auto border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="Search"/>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">

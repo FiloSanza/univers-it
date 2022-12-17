@@ -11,23 +11,13 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/searchbar.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-white lg:w-3/5 lg:mx-auto">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
+        @include('layouts.navigation')
+        <div class="min-h-screen bg-white">
             <!-- Page Content -->
-            <main>
+            <main class="lg:w-3/5 lg:mx-auto">
                 {{ $slot }}
             </main>
         </div>
