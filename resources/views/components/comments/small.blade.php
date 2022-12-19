@@ -6,7 +6,7 @@
 --}}
 
 <div>
-    <div class="lg:flex">
+    <div class="flex p-3 bg-gray-100 rounded-xl">
         <img src="{{ route('image.get', $user->propic) }}" class="w-10 h-10 rounded-full mx-2" />
         <a class="font-bold my-auto mx-1" href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }}: </a>
         <a class="my-auto"> {{ $content }} </a> 
