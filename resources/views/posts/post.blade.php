@@ -19,33 +19,27 @@
 @endphp
 
 <x-app-layout>
-    
-    <x-slot name="header">
-        <small> Posted in <a href="{{ route('group.show', $group->name) }}"> {{ $group->name }} </a> by </small>
-        <div class="lg:flex">
-            <img src="{{ route('image.get', $user->propic) }}" class="w-6 h-6 rounded-full" />
-            <a href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }} </a> 
+    <div class="border-b-2 border-gray-600 mt-4 p-4">
+        <div class="flex flex-row text-gray-800">
+            <img src="{{ route('image.get', $group->image_id) }}" class="mx-2 w-7 h-7 rounded-full" />
+            <p class="text-sm my-auto"> Posted in <a href="{{ route('group.show', $group->name) }}" class="underline">{{ $group->name }}</a> by <a href="{{ route('userpage.show', $user->name) }}" class="underline"> {{ $user->name }} </a> </p>
         </div>
-        <h2 class="font-bold text-xl text-gray-800 leading-tight">
-            {{ $post->title }}
-        </h2>
-    </x-slot>    
+        <header class="w-full flex flex-col lg:flex-row my-2 py-2 border-b-[1px]">
+            <h1 class="mx-auto font-bold text-xl text-gray-800 leading-tight">
+                {{ $post->title }}
+            </h1>
+        </header>
+        
+        <p> {{ $post->content }} </p>
     
-    <br/>
-
-    <p> {{ $post->content }} </p>
-
-    <br/>
-
-    @if($post->image_id)
-    <div class="border-b-2 border-gray-600 my-2">
-        <div class="mx-auto w-4/5">
-            <img class="max-w-full h-auto my-6" src='{{ route('image.get', $post->image_id) }}'/>
-        </div>
+        @if($post->image_id)
+            <div class="mx-auto w-4/5 mt-3">
+                <img class="max-w-full h-auto rounded-xl" src='{{ route('image.get', $post->image_id) }}'/>
+            </div>
+        @endif
     </div>
-    @endif
 
-    <h3> COMMENTS({{ $comments->count() }}) </h3>
+    <h2 class="my-3"> COMMENTS({{ $comments->count() }}) </h2>
 
     {{-- <form action="/create-comment" method="post">
         @csrf
@@ -66,8 +60,6 @@
         </x-primary-button>
 
     </form> --}}
-
-    <br/>
 
     <x-list.list itemtemplate='components.comments.small' :items="$comments->map($list_lambda)" />
 
