@@ -18,7 +18,7 @@
     };
 @endphp
 
-<x-app-layout>
+<x-app-layout id='post-page'>
     <div class="border-b-2 border-gray-600 mt-4 p-4">
         <div class="flex flex-row text-gray-800">
             <img src="{{ route('image.get', $group->image_id) }}" class="mx-2 w-7 h-7 rounded-full" />
@@ -39,9 +39,9 @@
         @endif
     </div>
 
-    <h2 class="my-3"> COMMENTS({{ $comments->count() }}) </h2>
+    <h2 class="my-3"> COMMENTS(<span id="comments-count"></span>) </h2>
 
-    {{-- <form action="/create-comment" method="post">
+    <form id="comment-form">
         @csrf
         <x-input-label for="content">
             New Comment
@@ -54,13 +54,13 @@
             class="block mt-1 w-full" 
             placeholder="Insert the comment's content..."
             required/>
-        <input type="hidden" name="post_id" value="{{ $post->id}}" />
-        <x-primary-button>
+        <input id="post_id" type="hidden" name="post_id" value="{{ $post->id}}" />
+        <x-primary-button id="submit-comment">
             Confirm
         </x-primary-button>
 
-    </form> --}}
+    </form>
 
-    <x-list.list itemtemplate='components.comments.small' :items="$comments->map($list_lambda)" />
+    <div id="comments-list" data-post="{{ $post->id }}"></div>
 
 </x-app-layout>

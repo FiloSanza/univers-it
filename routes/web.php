@@ -78,4 +78,7 @@ Route::get('/image/{id}', [ImageController::class, 'get'])->name('image.get');
 // Search routes
 Route::get('/search', SearchController::class)->name('search.show');
 
+// Comment routes
+Route::get('/comments/{post}', [CommentController::class, 'get'])->name('comments.get');
+
 require __DIR__.'/auth.php';
