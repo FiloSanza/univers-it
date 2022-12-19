@@ -42,7 +42,7 @@ class Comment extends Model
      * @var array<string,string>
      */
     public const VALIDATION_RULES = [
-        'content' => 'required|string|max:255',
+        'content' => 'required|text',
         'post_id' => 'required|int|exists:posts,id',
         'reply_to' => 'nullable|int|exists:comments,id'
     ];
