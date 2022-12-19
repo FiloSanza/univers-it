@@ -23,7 +23,7 @@ return new class extends Migration
                   ->constrained('users')
                   ->cascadeOnDelete()
                   ->cascadeOnUpdate();
-            $table->string('content');
+            $table->text('content');
             $table->timestamps();
         });
     }

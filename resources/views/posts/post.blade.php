@@ -50,7 +50,6 @@
             id="content" 
             name="content"
             rows="4"
-            maxlength="500"
             class="block mt-1 w-full" 
             placeholder="Insert the comment's content..."
             required/>

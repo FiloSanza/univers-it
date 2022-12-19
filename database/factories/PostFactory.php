@@ -22,7 +22,7 @@ class PostFactory extends Factory
             'user_id' => User::factory(),
             'group_id' => Group::factory(),
             'title' => fake()->word(),
-            'content' => fake()->paragraph(2)
+            'content' => fake()->text()
         ];
     }
 }
