@@ -2,8 +2,8 @@
     This is the template used to show a small version of the post.
     This page will show:
         - Title
-        - Group (if set)
-        - User (if set)
+        - Group
+        - User
         - Comment count
 --}}
 @props([ 'post', 'group', 'user' ])
