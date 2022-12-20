@@ -18,7 +18,8 @@
             'resources/js/comments.js',
             'resources/js/dropdown.js', 
             'resources/js/navbar.js', 
-            'resources/js/popup.js'
+            'resources/js/popup.js',
+            'resources/js/userpage.js'
         ])
     </head>
     <body class="font-sans antialiased">

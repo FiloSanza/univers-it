@@ -18,7 +18,7 @@
                 <img src="{{ route('image.get', $user->propic) }}" class="mx-auto w-24 h-24 rounded-full" alt="{{$user->name}} profile picture." />
             </div>
             <div class="text-center lg:w-3/5">
-                <div class="font-bold text-2xl"> {{ $user->name }} </div>
+                <div id="username" class="font-bold text-2xl">{{$user->name}}</div>
                 <div class="font-semibold"> Università di Bologna </div>
             </div>
             <div class="flex flex-col lg:w-1/5">
@@ -28,17 +28,17 @@
                         <small>Posts</small>
                     </div>
                     <div class="text-center m-1 p-1 cursor-pointer hover:bg-gray-100 hover:rounded-xl" data-target='followers-modal'>
-                        <p> {{ count($followers) }} </p> 
+                        <p id='followers-count'> {{ count($followers) }} </p> 
                         <small>Followers</small>
                     </div>
                     <div class="text-center m-1 p-1 cursor-pointer hover:bg-gray-100 hover:rounded-xl" data-target='following-modal'>
-                        <p> {{ count($follows) }} </p> 
+                        <p id='following-count'> {{ count($follows) }} </p> 
                         <small>Following</small>
                     </div>
                 </div>
                 @if(Auth::user() !== null && Auth::id() !== $user->id)
                     <div class="m-auto h-10 grid place-items-center">
-                        <x-follow-button :userid="$user->id" :isfollowed="$already_followed" />
+                        <x-follow-button :userid="$user->id" :isfollowed="$already_followed" :ismainbutton="true" />
                     </div>
                 @endunless
             </div>
@@ -49,14 +49,16 @@
         <x-slot:header>
             Followers
         </x-slot:header>
-        <x-list.list itemtemplate='components.users.small' :items="$followers->map($user_lambda)" />
+        <div id="followers-list">
+        </div>
     </x-popup>
 
     <x-popup name="following-modal">
         <x-slot:header>
             Following
         </x-slot:header>
-        <x-list.list itemtemplate='components.users.small' :items="$follows->map($user_lambda)" />
+        <div id="following-list">
+        </div>
     </x-popup>
 
     <section class="mx-auto mt-5 p-5 lg:w-4/5">

@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function () {
 
 // User page routes
 Route::get('/user/{username}', [UserPageController::class, 'show'])->name('userpage.show');
+Route::get('/user/following/{username}', [UserPageController::class, 'getFollowingInfo'])->name('userpage.info.following');
+Route::get('/user/followers/{username}', [UserPageController::class, 'getFollowersInfo'])->name('userpage.info.followers');
 
 // Group routes
 Route::get('/group/{name}', [GroupController::class, 'show'])->name('group.show');
