@@ -38,6 +38,10 @@ const handle_comment_submit = function(e) {
             $( '#comment-form' ).each(function(){
                 this.reset();
             });
+            if ($('#comment-form #reply_to')) {
+                $('#comment-form #reply_to').remove();
+            }
+            $('div[data-name="comment-modal"] h2').html('NEW COMMENT');
             $('.popup-body').hide();
         }
     });
