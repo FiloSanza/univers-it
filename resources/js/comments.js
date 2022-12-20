@@ -5,7 +5,7 @@ const ERROR_MESSAGE = `<span>ERROR WHILE GETTING THE COMMENTS</span>`;
 const DELAY = 1000;
 
 const handle_error = function(error) {
-    console.log(error.data);
+    console.log(error);
     $('#comments-count').html();
     $('#comments-list').html(ERROR_MESSAGE);
 };
@@ -38,6 +38,7 @@ const handle_comment_submit = function(e) {
             $( '#comment-form' ).each(function(){
                 this.reset();
             });
+            $('.popup-body').hide();
         }
     });
 };

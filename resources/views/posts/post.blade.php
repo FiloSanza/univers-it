@@ -39,27 +39,36 @@
         @endif
     </div>
 
-    <h2 class="my-3"> COMMENTS(<span id="comments-count"></span>) </h2>
-
-    <form id="comment-form">
-        @csrf
-        <x-input-label for="content">
-            New Comment
-        </x-input-label>
-        <x-textarea 
-            id="content" 
-            name="content"
-            rows="4"
-            class="block mt-1 w-full" 
-            placeholder="Insert the comment's content..."
-            required/>
-        <input id="post_id" type="hidden" name="post_id" value="{{ $post->id}}" />
-        <x-primary-button id="submit-comment">
-            Confirm
-        </x-primary-button>
-
-    </form>
+    <div class="flex flex-row justify-between font-bold">        
+        <h2 class="my-3 mx-2 lg:mx-0"> COMMENTS(<span id="comments-count"></span>) </h2>
+        <div class="m-1 mx-2 p-2 cursor-pointer bg-blue-100 inline-block rounded-xl align-right lg:mx-0 hover:bg-gray-100" data-target='comment-modal'>
+            <span>New Comment</span>
+        </div>
+    </div>
 
     <div id="comments-list" data-post="{{ $post->id }}"></div>
+
+    <x-popup name="comment-modal">
+        <x-slot:header>
+            New Comment
+        </x-slot:header>
+        <form id="comment-form">
+            @csrf
+            <x-input-label class="hidden" for="content">
+                New Comment
+            </x-input-label>
+            <x-textarea 
+                id="content" 
+                name="content"
+                rows="4"
+                class="block mt-1 w-full" 
+                placeholder="Insert the comment's content..."
+                required/>
+            <input id="post_id" type="hidden" name="post_id" value="{{ $post->id}}" />
+            <x-primary-button class="my-2" id="submit-comment">
+                Confirm
+            </x-primary-button>
+        </form>
+    </x-popup>
 
 </x-app-layout>
