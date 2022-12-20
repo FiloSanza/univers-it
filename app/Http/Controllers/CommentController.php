@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewCommentEvent;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class CommentController extends Controller
      * Store a newly created comment in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response 
+     * @return \Illuminate\Http\JsonResponse 
      */
     public function store(Request $request)
     {
@@ -27,10 +28,11 @@ class CommentController extends Controller
 
         $comment->save();
 
+        event(new NewCommentEvent($comment));
+
         return response()->json(['success' => 'success'], 200);
     }
 
-        
     /**
      * Get all the comments linked to a post.
      *
@@ -39,14 +41,16 @@ class CommentController extends Controller
      */
     public function get(string $postid) {
         $post = Post::where('id', $postid)->first();
-        $list_lambda = function ($p) { 
-            return ['user' => $p->user()->first(), 'content' => $p->content]; 
-        };
         $comments = $post->comments()->get();
+        $payload = $comments->map(function ($p) {
+            return ['user' => $p->user()->first(), 'content' => $p->content];
+        });
+
         return json_encode([
-            'view' => view('components.list.list', 
-                [ 'itemtemplate' => 'components.comments.small', 
-                'items' => $comments->map($list_lambda) ])->render(),
+            'view' => view('components.list.list', [ 
+                    'itemtemplate' => 'components.comments.small', 
+                    'items' => $payload
+                ])->render(),
             'count' => $comments->count()
         ]);
     }

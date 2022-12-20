@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewFollowerEvent;
 use App\Models\FollowEdge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,8 @@ class FollowEdgeController extends Controller
         $edge->follower_id = Auth::id();
         $edge->followed_id = $followed_id;
         $edge->save();
+
+        event(new NewFollowerEvent($edge));
 
         return Redirect::back()->with('Success.');
     }

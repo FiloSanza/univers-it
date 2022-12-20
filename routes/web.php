@@ -6,6 +6,7 @@ use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupFollowEdgeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserPageController;
@@ -61,6 +62,9 @@ Route::middleware('auth')->group(function () {
     // Comment routes
     Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');
     
+    // Notification routes
+    Route::post('/notification/read/{id}', [NotificationController::class, 'markAsRead'])->name('notification.read');
+    Route::post('/notification/readall', [NotificationController::class, 'readAll'])->name('notification.readall');
 });
 
 // User page routes
