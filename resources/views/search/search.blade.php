@@ -8,7 +8,7 @@
     $users = $results['users'];
     $groups = $results['groups'];
     $list_lambda_user = function ($p) { 
-        return ['user' => $p, 'already_followed' => Helper::isAFollowerOfB(Auth::user(), $p)]; 
+        return ['user' => $p]; 
     };
     $list_lambda_group = function ($p) { 
         return ['group' => $p]; 
