@@ -21,26 +21,28 @@ const update_comments = function() {
     });
 };
 
-$(function(){
-    update_comments();
-    $("#comment-form").on("submit", function(e) { 
-        e.preventDefault(); 
-        $.ajax({
-            type: "POST",
-            url: "/create-comment",
-            data: $('#comment-form').serialize(),
-            timeout: 4000,
-            success: function() {
-                update_comments();
-            },
-            error: function(error) {
-                handle_error(error);
-            },
-            complete: function() {
-                $( '#comment-form' ).each(function(){
-                    this.reset();
-                });
-            }
-        });
+const handle_comment_submit = function(e) { 
+    e.preventDefault(); 
+    $.ajax({
+        type: "POST",
+        url: "/create-comment",
+        data: $('#comment-form').serialize(),
+        timeout: 4000,
+        success: function() {
+            update_comments();
+        },
+        error: function(error) {
+            handle_error(error);
+        },
+        complete: function() {
+            $( '#comment-form' ).each(function(){
+                this.reset();
+            });
+        }
     });
+};
+
+$(() => {
+    update_comments();
+    $("#comment-form").on("submit", handle_comment_submit);
 });
