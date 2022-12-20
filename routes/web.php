@@ -27,10 +27,6 @@ use Illuminate\Support\Facades\Route;
 // Home Route
 Route::get('/', HomeController::class)->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // Insert here all the routes that need to be authenticated.
 Route::middleware('auth')->group(function () {
 
