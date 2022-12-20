@@ -37,7 +37,7 @@ class CommentController extends Controller
      * Get all the comments linked to a post.
      *
      * @param  string $postid: the id of the post;
-     * @return mixed: html containing all the comments and the comments count.
+     * @return \Illuminate\Http\JsonResponse html containing all the comments and the comments count.
      */
     public function get(string $postid) {
         $post = Post::where('id', $postid)->first();
@@ -46,7 +46,7 @@ class CommentController extends Controller
             return ['user' => $p->user()->first(), 'content' => $p->content];
         });
 
-        return json_encode([
+        return response()->json([
             'view' => view('components.list.list', [ 
                     'itemtemplate' => 'components.comments.small', 
                     'items' => $payload
