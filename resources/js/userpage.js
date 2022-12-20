@@ -7,13 +7,10 @@ const handle_error = function(error) {
 
 const handle_click = function(evt) {
     const id = $(this).data('follow-id');
-    const type = $(this).data('follow-type');
     const operation = $(this).text().trim().toLowerCase();
-    const data = operation === 'group'
-        ? { 'group_id': id }
-        : { 'followed_id': id };
+    const data = { 'followed_id': id };
 
-    axios.post(`/${type}/${operation}`,data).then(
+    axios.post(`/user/${operation}`,data).then(
         () => {
             if ($(evt.target).data('follow-main') !== undefined) {
                 window.location.reload();
