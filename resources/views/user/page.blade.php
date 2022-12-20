@@ -15,7 +15,7 @@
     <header class="mx-auto border-b-2 border-gray-600 p-3 lg:max-w-5xl">
         <div class="flex flex-col items-center lg:flex-row">
             <div class="lg:w-1/5">
-                <img src="{{ route('image.get', $user->propic) }}" class="mx-auto w-24 h-24 rounded-full" />
+                <img src="{{ route('image.get', $user->propic) }}" class="mx-auto w-24 h-24 rounded-full" alt="{{$user->name}} profile picture." />
             </div>
             <div class="text-center lg:w-3/5">
                 <div class="font-bold text-2xl"> {{ $user->name }} </div>
@@ -23,21 +23,15 @@
             </div>
             <div class="flex flex-col lg:w-1/5">
                 <div class="m-auto flex">
-                    <div class="text-center m-1">
+                    <div class="text-center m-1 p-1">
                         <p> {{ count($posts) }} </p> 
                         <small>Posts</small>
                     </div>
-                    <div 
-                        class="text-center m-1"
-                        onclick="document.getElementsByName('followers-modal')[0].style.display = 'block'"
-                    >
+                    <div class="text-center m-1 p-1 cursor-pointer hover:bg-gray-100 hover:rounded-xl" data-target='followers-modal'>
                         <p> {{ count($followers) }} </p> 
                         <small>Followers</small>
                     </div>
-                    <div 
-                        class="text-center m-1"
-                        onclick="document.getElementsByName('following-modal')[0].style.display = 'block'"
-                    >
+                    <div class="text-center m-1 p-1 cursor-pointer hover:bg-gray-100 hover:rounded-xl" data-target='following-modal'>
                         <p> {{ count($follows) }} </p> 
                         <small>Following</small>
                     </div>
