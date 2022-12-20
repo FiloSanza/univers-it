@@ -5,7 +5,7 @@ const ERROR_MESSAGE = `<span>ERROR WHILE GETTING THE COMMENTS</span>`;
 const DELAY = 1000;
 
 const handle_error = function(error) {
-    console.log(error.data);
+    console.log(error);
     $('#comments-count').html();
     $('#comments-list').html(ERROR_MESSAGE);
 };
@@ -38,11 +38,19 @@ const handle_comment_submit = function(e) {
             $( '#comment-form' ).each(function(){
                 this.reset();
             });
+            if ($('#comment-form #reply_to')) {
+                $('#comment-form #reply_to').remove();
+            }
+            $('div[data-name="comment-modal"] h2').html('NEW COMMENT');
+            $('.popup-body').hide();
         }
     });
 };
 
 $(() => {
-    update_comments();
-    $("#comment-form").on("submit", handle_comment_submit);
+    if ($('#comments-count').length > 0) {
+        console.log('pippo');
+        update_comments();
+        $("#comment-form").on("submit", handle_comment_submit);
+    }
 });

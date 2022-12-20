@@ -43,7 +43,8 @@ class CommentController extends Controller
         $post = Post::where('id', $postid)->first();
         $comments = $post->comments()->get();
         $payload = $comments->map(function ($p) {
-            return ['user' => $p->user()->first(), 'content' => $p->content];
+            return ['user' => $p->user()->first(), 'content' => $p->content,
+                'id' => $p->id, 'reply_to' => $p->reply_to];
         });
 
         return response()->json([
