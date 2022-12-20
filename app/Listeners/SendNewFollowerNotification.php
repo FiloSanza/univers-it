@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\NewFollowerEvent;
+use App\Models\User;
 use App\Notifications\NewFollowerNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,8 +28,8 @@ class SendNewFollowerNotification
      */
     public function handle(NewFollowerEvent $event)
     {
-        $user = $event->edge->followed()->first();
-        $follower = $event->edge->follower()->first();
+        $user = User::where('id', $event->edge->followed_id)->first();
+        $follower = User::where('id', $event->edge->follower_id)->first();
         $user->notify(new NewFollowerNotification($user, $follower));
     }
 }
