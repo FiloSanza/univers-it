@@ -19,7 +19,7 @@
             <img class="mx-auto w-24 h-24 rounded-full" src="{{ route('image.get', $group->image_id) }}" alt="{{ $group->name }} profile picture." />
         </div>
         <div class="text-center lg:w-3/5">
-            <h1 class="font-bold text-2xl">
+            <h1 id="groupname" class="font-bold text-2xl">
                 {{ $group->name }}
             </h1>
             <p> {{ $group->description }} </p>
@@ -27,7 +27,7 @@
         <div class="my-2 w-4/5 flex items-center flex-row lg:flex-col lg:w-1/5">
             @auth
                 <div class="w-1/2 text-center lg:w-full lg:my-2">
-                    <x-follow-button :groupid="$group->id" :isfollowed="$already_followed"/>
+                    <x-follow-button :groupid="$group->id" :isfollowed="$already_followed" :ismainbutton="true" />
                 </div>
                 <div class="w-1/2 text-center lg:w-full lg:my-2">
                     <a class="bg-blue-500 text-white rounded-xl px-12 py-0.5 hover:bg-white hover:text-blue-500 hover:border-2 hover:border-blue-500" href="{{ route('post.create', $group->name) }}">

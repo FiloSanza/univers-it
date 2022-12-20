@@ -19,7 +19,8 @@
             'resources/js/dropdown.js', 
             'resources/js/navbar.js', 
             'resources/js/popup.js',
-            'resources/js/userpage.js'
+            'resources/js/userpage.js',
+            'resources/js/grouppage.js',
         ])
     </head>
     <body class="font-sans antialiased">
