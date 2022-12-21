@@ -7,12 +7,18 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <form method="POST" action="{{ route('profile.updatePropic') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
-                    <input type="file" class="form-control" name="image" />
-                    <button type="submit" class="btn btn-sm">Upload</button>
+                    <input type="file" 
+                        class="block w-full text-sm text-slate-500
+                        file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0
+                        file:text-sm file:font-semibold file:bg-blue-100 file:text-violet-700
+                        hover:file:bg-violet-100" 
+                        name="image" />
+                    <x-primary-button class="mt-5">{{ __('Save') }}</x-primary-button>
+                    {{-- <button type="submit" class="btn btn-sm my-2">Upload</button> --}}
                 </form>        
             </div>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
