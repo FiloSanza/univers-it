@@ -43,7 +43,7 @@
                 required />
         </div>
         <div class="flex flex-col items-center">
-            <x-primary-button class="hover:text-gray-900 hover:bg-blue-100 hover:border-indigo-500 hover:ring-indigo-500">
+            <x-primary-button>
                 Confirm
             </x-primary-button>
         </div>
