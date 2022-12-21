@@ -12,12 +12,12 @@
             <img src="{{ route('image.get', $user->propic) }}" class="w-7 h-7 rounded-full mx-2" />
             <a class="font-bold mx-2" href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }} </a>
             @if($reply_to)
-            <a class="p-1 text-center font-bold mx- bg-blue-100 rounded-xl ml-auto hover:bg-fuchsia-100" href="#{{ $reply_to }}">Previous</a>
+            <a class="p-1 w-20 text-center font-bold bg-blue-100 rounded-xl ml-auto hover:bg-fuchsia-100" href="#{{ $reply_to }}">Previous</a>
             @endif
         </div>
-        <div class="my-3">
-            <a class="mx-4 my-4"> {{ $content }} </a> 
+        <div class="mt-2 flex">
+            <a class="mx-4"> {{ $content }} </a> 
+            <p class="reply-span w-20 ml-auto p-1 text-center font-bold bg-blue-100 rounded-xl hover:bg-fuchsia-100" data-target="comment-modal">Reply</p>
         </div>
-        <p class="reply-span w-fit p-1 font-bold my-auto mx-4 bg-blue-100 rounded-xl hover:bg-fuchsia-100" data-target="comment-modal">Reply</p>
     </div>
 </div>
