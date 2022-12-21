@@ -49,7 +49,6 @@ const handle_comment_submit = function(e) {
 
 $(() => {
     if ($('#comments-count').length > 0) {
-        console.log('pippo');
         update_comments();
         $("#comment-form").on("submit", handle_comment_submit);
     }
