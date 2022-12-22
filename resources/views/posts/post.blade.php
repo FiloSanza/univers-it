@@ -41,9 +41,11 @@
 
     <div class="flex flex-row justify-between font-bold">        
         <h2 class="my-3 mx-2 lg:mx-0"> COMMENTS(<span id="comments-count"></span>) </h2>
+        @auth
         <div class="m-1 mx-2 p-2 cursor-pointer bg-blue-100 inline-block rounded-xl align-right lg:mx-0 hover:bg-gray-100" data-target='comment-modal'>
-            <span>New Comment</span>
+                <span>New Comment</span>
         </div>
+        @endauth
     </div>
 
     <div id="comments-list" data-post="{{ $post->id }}"></div>

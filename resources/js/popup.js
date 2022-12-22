@@ -6,7 +6,7 @@ $(document).on('click', function(evt) {
     if (target_popup) {
         $(`div.popup-body[data-name='${target_popup}']`).toggle();
     }
-    if (evt.target.classList.contains('reply-span')) {
+    if (evt.target.classList.contains('reply-p')) {
         $('div[data-name="comment-modal"] h2').html('REPLY');
         $('<input>').attr({
             type: 'hidden',
