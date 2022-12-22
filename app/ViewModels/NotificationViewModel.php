@@ -3,71 +3,90 @@
 namespace App\ViewModels;
 use App\Notifications\NewCommentNotification;
 use App\Notifications\NewFollowerNotification;
-use Illuminate\Notifications\Notification;
-use App\Enum\NotificationTypes;
-use App\Enum\NotificationFieldTypes;
+use Illuminate\Notifications\DatabaseNotification;
+use App\Enums\NotificationTypes;
 
 class NotificationViewModel
 {
     /**
      * The original notification.
      * 
-     * @var Notification
+     * @var DatabaseNotification
      */
-    public Notification $notification;
+    public DatabaseNotification $notification;
 
     /**
-     * The notification serialized as an array.
+     * The id of the notification.
      * 
-     * @var array
+     * @var string
      */
-    public array $serializedNotification;
+    public string $id;
+
+    /**
+     * Whether the notification has been read or not.
+     * 
+     * @var bool
+     */
+    public bool $read;
+
+    /**
+     * Type of the notification
+     * 
+     * @var \App\Enum\NotificationTypes
+     */
+    public NotificationTypes $type;
+
+    /**
+     * The user that will be showed in the notification.
+     * @var object
+     */
+    public ?object $user;
+
+    /**
+     * The comment that will be showed in the notification.
+     * @var object
+     */
+    public ?object $comment;
+
+    /**
+     * The post that will be showed in the notification.
+     * @var object
+     */
+    public ?object $post;
 
     /**
      * Construct a new object.
      * 
-     * @param Notification $notification.
+     * @param DatabaseNotification $notification.
      */
-    public function __construct(Notification $notification) {
+    public function __construct(DatabaseNotification $notification) {
         $this->notification = $notification;
-        $this->serialize($notification);
+        $this->deserialize($notification);
     }
 
-    private function serialize(Notification $notification) {
-        dd($notification->type);
-
-        $this->serializedNotification = [];
-
+    private function deserialize(DatabaseNotification $notification) {
+        $this->id = $notification->id;
+        $this->read = !is_null($notification->read_at);
         switch ($notification->type) {
             case NewFollowerNotification::class:
-                $this->serializeNewFollowerNotification($notification);
+                $this->deserializeNewFollowerNotification($notification);
                 break;
             case NewCommentNotification::class:
-                $this->serializeNewCommentNotification($notification);
+                $this->deserializeNewCommentNotification($notification);
                 break;
         }
     }
 
-    private function addSerializedEntry(NotificationFieldTypes $type, mixed $value) {
-        $this->serializedNotification[] = [
-            'type' => $type,
-            'value' => $value
-        ];
+    private function deserializeNewFollowerNotification(DatabaseNotification $notification) {
+        $follower = (object)$notification->data["follower"];
+        $this->type = NotificationTypes::NEW_FOLLOWER;
+        $this->user = $follower;
     }
 
-    private function serializeNewFollowerNotification(NewFollowerNotification $notification) {
-        $this->addSerializedEntry(NotificationFieldTypes::TYPE, NotificationTypes::NEW_FOLLOWER);
-        $this->addSerializedEntry(NotificationFieldTypes::USER_LINK, $notification->follower);
-    }
-
-    private function serializeNewCommentNotification(NewCommentNotification $notification) {
-        $comment = $notification->comment;
-        $post = $notification->comment->post()->first();
-        $user = $notification->comment->user()->first();
-
-        $this->addSerializedEntry(NotificationFieldTypes::TYPE, NotificationTypes::NEW_COMMENT);
-        $this->addSerializedEntry(NotificationFieldTypes::USER_LINK, $user);
-        $this->addSerializedEntry(NotificationFieldTypes::POST_LINK, $post);
-        $this->addSerializedEntry(NotificationFieldTypes::COMMENT_LINK, $comment);
+    private function deserializeNewCommentNotification(DatabaseNotification $notification) {
+        $this->type = NotificationTypes::NEW_COMMENT;
+        $this->comment = (object)$notification->data["comment"];
+        $this->post = (object)$notification->data["post"];
+        $this->user = (object)$notification->data["user"];
     }
 }
