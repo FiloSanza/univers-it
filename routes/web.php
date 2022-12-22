@@ -59,8 +59,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/create-comment', [CommentController::class, 'store'])->name('comment.store');
     
     // Notification routes
-    Route::post('/notification/read/{id}', [NotificationController::class, 'markAsRead'])->name('notification.read');
-    Route::post('/notification/readall', [NotificationController::class, 'readAll'])->name('notification.readall');
+    Route::get('/notification/read/{id}', [NotificationController::class, 'markAsRead'])->name('notification.read');
+    Route::get('/notification/readall', [NotificationController::class, 'readAll'])->name('notification.readall');
+    Route::get('/notification-list', [NotificationController::class, 'getNotifications'])->name('notification.list');
+    Route::get('/notifications', [NotificationController::class, 'showNotificationsPage'])->name('notification.show');
 });
 
 // User page routes

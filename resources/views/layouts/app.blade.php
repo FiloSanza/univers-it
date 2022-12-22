@@ -21,6 +21,7 @@
             'resources/js/popup.js',
             'resources/js/userpage.js',
             'resources/js/grouppage.js',
+            'resources/js/notifications.js',
         ])
     </head>
     <body class="font-sans antialiased">
