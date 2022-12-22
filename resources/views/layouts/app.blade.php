@@ -22,6 +22,7 @@
             'resources/js/userpage.js',
             'resources/js/grouppage.js',
             'resources/js/notifications.js',
+            'resources/js/profile.js'
         ])
     </head>
     <body class="font-sans antialiased">
