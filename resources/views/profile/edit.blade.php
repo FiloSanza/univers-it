@@ -18,7 +18,6 @@
                         hover:file:bg-violet-100" 
                         name="image" />
                     <x-primary-button class="mt-5">{{ __('Save') }}</x-primary-button>
-                    {{-- <button type="submit" class="btn btn-sm my-2">Upload</button> --}}
                 </form>        
             </div>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
