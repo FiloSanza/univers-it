@@ -26,7 +26,7 @@
                             </div>
                             <p class="my-auto text-m"> Commented under your post <a href="{{ route('post.show', $notification->post->id) }}" class="underline"> {{ $notification->post->title }}</a>: </p>
                         </div>
-                        <p class="m-5"> {{ $notification->comment->content }} </p>
+                        <p class="m-5 break-words"> {{ $notification->comment->content }} </p>
                         <a class="underline" href="{{ route('post.show', $notification->post->id).'#'.$notification->comment->id}} "> Go to the comment. </a>
                     @break
                 @endswitch

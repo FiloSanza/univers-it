@@ -7,18 +7,22 @@
 --}}
 
 <div class="my-1">
-    <div class="p-3 bg-gray-100 rounded-xl target:bg-fuchsia-100">
-        <div class="flex">
-            <img src="{{ route('image.get', $user->propic) }}" class="w-7 h-7 rounded-full mx-2" />
-            <a class="font-bold mx-2" href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }} </a>
-            @if($reply_to)
-            <a class="p-1 w-20 text-center font-bold bg-blue-100 rounded-xl ml-auto hover:bg-blue-300" href="#{{ $reply_to }}">Previous</a>
-            @endif
+    <div class="flex flex-col p-3 bg-gray-100 rounded-xl sm:flex-row target:bg-grey-300">
+        <div class="flex flex-col w-[85%]">
+            <div class="flex flew-col">
+                <div class="flex flex-row items-center">
+                    <img src="{{ route('image.get', $user->propic) }}" class="w-7 h-7 rounded-full mr-2" />
+                    <a class="font-bold mx-2" href="{{ route('userpage.show', $user->name) }}"> {{ $user->name }} </a>
+                </div>
+            </div>
+            <p class="break-words w-full"> {{ $content }} </p> 
         </div>
-        <div class="mt-2 flex" id="{{ $id }}">
-            <a class="mx-4"> {{ $content }} </a> 
+        <div class="mt-2 w-full flex flex-row sm:flex-col sm:w-[15%] sm:max-w-20" id="{{ $id }}">
+            @if($reply_to)
+                <a class="p-1 w-1/2 m-1 text-center font-bold bg-blue-100 rounded-xl hover:bg-blue-300 sm:w-full sm:mx-auto" href="#{{ $reply_to }}">Previous</a>
+            @endif
             @auth
-                <p class="reply-p w-20 ml-auto p-1 text-center font-bold bg-blue-100 rounded-xl hover:bg-fuchsia-100" data-target="comment-modal">Reply</p>
+                <p class="reply-p my-auto mx-auto m-1 p-1 w-1/2 text-center font-bold bg-blue-100 rounded-xl hover:bg-blue-300 sm:w-full" data-target="comment-modal">Reply</p>
             @endauth
         </div>
     </div>
