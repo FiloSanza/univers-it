@@ -12,6 +12,14 @@
 @endphp
 
 <x-app-layout>
+
+    <x-slot name="script">
+        @vite([
+            'resources/js/popup.js',
+            'resources/js/userpage.js'
+        ])
+    </x-slot>
+
     <header class="mx-auto border-b-2 border-gray-600 p-3 lg:max-w-5xl">
         <div class="flex flex-col items-center lg:flex-row">
             <div class="lg:w-1/5">

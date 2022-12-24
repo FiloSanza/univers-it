@@ -48,8 +48,6 @@ const handle_comment_submit = function(e) {
 };
 
 $(() => {
-    if ($('#comments-count').length > 0) {
-        update_comments();
-        $("#comment-form").on("submit", handle_comment_submit);
-    }
+    update_comments();
+    $("#comment-form").on("submit", handle_comment_submit);
 });

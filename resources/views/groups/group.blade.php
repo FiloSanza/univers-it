@@ -14,6 +14,13 @@
 @endphp
 
 <x-app-layout>
+
+    <x-slot name="script">
+        @vite([
+            'resources/js/grouppage.js', 
+        ])
+    </x-slot>
+
     <div class="flex flex-col items-center lg:flex-row border-b-2 border-gray-600 p-3">
         <div class="lg:w-1/5">
             <img class="mx-auto w-24 h-24 rounded-full" src="{{ route('image.get', $group->image_id) }}" alt="{{ $group->name }} profile picture." />

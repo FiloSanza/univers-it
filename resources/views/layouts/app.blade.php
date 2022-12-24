@@ -15,15 +15,15 @@
             'resources/css/app.css',
             'resources/js/app.js', 
             'resources/js/searchbar.js', 
-            'resources/js/comments.js',
             'resources/js/dropdown.js', 
             'resources/js/navbar.js', 
-            'resources/js/popup.js',
-            'resources/js/userpage.js',
-            'resources/js/grouppage.js',
             'resources/js/notifications.js',
-            'resources/js/profile.js'
         ])
+        
+        @if (isset($script))
+            {{$script}}
+        @endif
+
     </head>
     <body class="font-sans antialiased">
         @include('layouts.navigation')

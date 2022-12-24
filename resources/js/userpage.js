@@ -44,7 +44,5 @@ const load_data = function() {
 };
 
 $(() => {
-    if ($("username").length > 0) {
-        load_data();
-    }
+    load_data();
 });

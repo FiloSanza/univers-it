@@ -19,6 +19,14 @@
 @endphp
 
 <x-app-layout id='post-page'>
+
+    <x-slot name="script">
+        @vite([
+            'resources/js/popup.js',
+            'resources/js/comments.js', 
+        ])
+    </x-slot>
+
     <div class="border-b-2 border-gray-600 mt-4 p-4">
         <div class="flex flex-row text-gray-800">
             <img src="{{ route('image.get', $group->image_id) }}" class="mx-2 w-7 h-7 rounded-full" alt="Group Image" />

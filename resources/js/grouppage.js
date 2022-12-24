@@ -12,7 +12,5 @@ const handle_click = function() {
 }
 
 $(() => {
-    if ($('#groupname').length > 0) {
-        $('[data-follow-main]').on('click', handle_click);
-    }
+    $('[data-follow-main]').on('click', handle_click);
 });
