@@ -8,11 +8,12 @@ $(document).on('click', function(evt) {
     }
     if (evt.target.classList.contains('reply-p')) {
         $('div[data-name="comment-modal"] h2').html('REPLY');
+        console.log(evt.target);
         $('<input>').attr({
             type: 'hidden',
             id: 'reply_to',
             name: 'reply_to',
-            value: evt.target.parentNode.getAttribute('id'),
+            value: evt.target.parentNode.parentNode.getAttribute('id'),
         }).appendTo('#comment-form');
     }
 });

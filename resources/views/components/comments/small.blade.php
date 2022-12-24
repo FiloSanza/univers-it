@@ -7,7 +7,7 @@
 --}}
 
 <div class="my-1">
-    <div class="flex flex-col p-3 bg-gray-100 rounded-xl sm:flex-row target:bg-grey-300">
+    <div id="{{ $id }}" class="flex flex-col p-3 bg-gray-100 rounded-xl sm:flex-row target:bg-gray-300">
         <div class="flex flex-col w-[85%]">
             <div class="flex flew-col">
                 <div class="flex flex-row items-center">
@@ -17,7 +17,7 @@
             </div>
             <p class="break-words w-full"> {{ $content }} </p> 
         </div>
-        <div class="mt-2 w-full flex flex-row sm:flex-col sm:w-[15%] sm:max-w-20" id="{{ $id }}">
+        <div class="mt-2 w-full flex flex-row sm:flex-col sm:w-[15%] sm:max-w-20">
             @if($reply_to)
                 <a class="p-1 w-1/2 m-1 text-center font-bold bg-blue-100 rounded-xl hover:bg-blue-300 sm:w-full sm:mx-auto" href="#{{ $reply_to }}">Previous</a>
             @endif
