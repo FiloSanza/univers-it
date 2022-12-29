@@ -37,7 +37,7 @@ class PostReaction extends Model
     }
 
     public const VALIDATION_RULES = [
-        'reaction_id' => 'required|int|exists:reactions,id',
+        'reaction_name' => 'required|string|exists:reactions,name',
         'post_id' => 'required|int|exists:posts,id',
     ];
 }

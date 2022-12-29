@@ -12,7 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactionImageController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\SearchController;
-use App\Models\PostReaction;
+use App\Http\Controllers\PostReactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'showNotificationsPage'])->name('notification.show');
 
     // PostReaction routes
-    Route::post('/post/react', [PostReaction::class, '__invoke'])->name('post-reaction.store');
+    Route::post('/post/react', [PostReactionController::class, 'store'])->name('post-reaction.store');
 
 });
 
