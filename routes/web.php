@@ -9,8 +9,10 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReactionImageController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\SearchController;
+use App\Models\PostReaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +65,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/notification/readall', [NotificationController::class, 'readAll'])->name('notification.readall');
     Route::get('/notification-list', [NotificationController::class, 'getNotifications'])->name('notification.list');
     Route::get('/notifications', [NotificationController::class, 'showNotificationsPage'])->name('notification.show');
+
+    // ReactionImages routes
+    Route::post('/create-reaction', [ReactionImageController::class, '__invoke'])->name('reaction.store');
+    // PostReaction routes
+    Route::post('/post/react', [PostReaction::class, '__invoke'])->name('post-reaction.store');
+
 });
 
 // User page routes

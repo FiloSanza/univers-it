@@ -38,6 +38,15 @@ class Post extends Model
     }
 
     /**
+     * Returns all the reactions to this post.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reactions() {
+        return $this->hasMany(PostReaction::class);
+    }
+
+    /**
      * All the validation rule that the HTTP request needs to pass.   
      * 
      * @var array<string,string>
