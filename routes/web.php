@@ -66,8 +66,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/notification-list', [NotificationController::class, 'getNotifications'])->name('notification.list');
     Route::get('/notifications', [NotificationController::class, 'showNotificationsPage'])->name('notification.show');
 
-    // ReactionImages routes
-    Route::post('/create-reaction', [ReactionImageController::class, '__invoke'])->name('reaction.store');
     // PostReaction routes
     Route::post('/post/react', [PostReaction::class, '__invoke'])->name('post-reaction.store');
 

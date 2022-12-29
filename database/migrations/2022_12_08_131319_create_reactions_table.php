@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reaction_images', function (Blueprint $table) {
+        Schema::create('reactions', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50)
                 ->unique();
-            $table->foreignId('image_id')
-                ->constrained('images')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reaction_images');
+        Schema::dropIfExists('reactions');
     }
 };

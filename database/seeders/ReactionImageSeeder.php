@@ -17,14 +17,8 @@ class ReactionImageSeeder extends Seeder
      */
     public function run()
     {
-        ReactionImage::factory()->create([
-            'name' => 'shaq_surprised', 
-            'image_id' => Image::where('storage_path', 'shaq.png')->first()->id,
-        ]);
+        ReactionImage::factory()->create([ 'name' => 'like' ]);
 
-        ReactionImage::factory()->create([
-            'name' => 'mike_wtf', 
-            'image_id' => Image::where('storage_path', 'mike.jpg')->first()->id,
-        ]);
+        ReactionImage::factory()->create([ 'name' => 'dislike' ]);
     }
 }

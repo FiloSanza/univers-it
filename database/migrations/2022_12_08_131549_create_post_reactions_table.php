@@ -19,8 +19,8 @@ return new class extends Migration
                 ->constrained('posts')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('reaction_image_id')
-                ->constrained('reaction_images')
+            $table->foreignId('reaction_id')
+                ->constrained('reactions')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('user_id')

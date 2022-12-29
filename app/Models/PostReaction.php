@@ -15,7 +15,7 @@ class PostReaction extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function reaction() {
-        return $this->belongsTo(ReactionImage::class);
+        return $this->belongsTo(Reaction::class);
     }
 
     /**
@@ -37,7 +37,7 @@ class PostReaction extends Model
     }
 
     public const VALIDATION_RULES = [
-        'reaction_image_id' => 'required|int|exists:reaction_images,id',
+        'reaction_id' => 'required|int|exists:reactions,id',
         'post_id' => 'required|int|exists:posts,id',
     ];
 }
