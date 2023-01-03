@@ -6,8 +6,7 @@ const handle_click = function() {
     const operation = $(this).text().trim().toLowerCase();
     const data = { 'group_id': id };
 
-    axios
-        .post(`/group/${operation}`, data)
+    axios.post(`/group/${operation}`, data)
         .then(() => window.location.reload());
 }
 
