@@ -19,7 +19,8 @@
                 file:text-sm file:font-semibold file:bg-blue-100
                 hover:file:bg-gray-100" 
                 name="image"
-                id="image" />
+                id="image"
+                required />
         </div>
 
         <div class="flex items-center gap-4">
