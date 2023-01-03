@@ -18,7 +18,8 @@
                 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0
                 file:text-sm file:font-semibold file:bg-blue-100
                 hover:file:bg-gray-100" 
-                name="image" />
+                name="image"
+                id="image" />
         </div>
 
         <div class="flex items-center gap-4">
