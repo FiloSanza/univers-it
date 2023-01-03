@@ -1,7 +1,7 @@
 import axios from "axios";
 import $ from 'jquery';
 
-const loadMailSetting = function () {
+const update_mail_settings = function () {
     axios.get('/profile/mail-settings').then(response => {
         for (const key in response.data) {
             const value = response.data[key];
@@ -19,11 +19,11 @@ const handle_checkbox = function(evt) {
     const type = evt.target.id;
     const data = { 'type':type };
     axios.patch('/profile/mail-settings',data)
-        .then( () => loadMailSetting() );
+        .then( () => update_mail_settings() );
 }
 
 $(() => {
-    loadMailSetting();
+    update_mail_settings();
     $('#cancel-button').on('click', handle_cancel_click);
     $('input[type="checkbox"]').on('change', handle_checkbox);
 
