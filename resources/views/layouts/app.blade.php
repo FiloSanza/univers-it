@@ -16,10 +16,15 @@
             'resources/js/app.js', 
             'resources/js/searchbar.js', 
             'resources/js/dropdown.js', 
-            'resources/js/navbar.js', 
+            'resources/js/navbar.js',
+            ])
+        
+        @if (!is_null(Auth::user())) 
+        @vite([
             'resources/js/notifications.js',
         ])
-        
+        @endif
+
         @if (isset($script))
             {{$script}}
         @endif
