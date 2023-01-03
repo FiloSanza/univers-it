@@ -6,6 +6,7 @@ use App\Http\Controllers\FollowEdgeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupFollowEdgeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MailSettingsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('/profile/propic', [ProfileController::class, 'updatePropic'])->name('profile.updatePropic');
+    Route::patch('/profile/mail-settings', [ProfileController::class, 'updateMailSettings'])->name('profile.mail');
+    Route::get('/profile/mail-settings', MailSettingsController::class)->name('profile.mail');
 
     // Group routes
     Route::get('/create-group', [GroupController::class, 'create'])->name('group.create');
