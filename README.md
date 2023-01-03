@@ -68,3 +68,5 @@ We decided to add the following things that were not in the assignment:
 - Replies to comments.
 - Toggle email notifications: user's can decide which notifications they want to receive via mail.
 - Secure password store.
+- Ajax
+- Laravel
