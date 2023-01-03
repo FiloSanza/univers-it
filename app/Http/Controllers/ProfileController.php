@@ -58,6 +58,21 @@ class ProfileController extends Controller
     }
 
     /**
+     * Updates the user's mail notification settings.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateMailSettings(Request $request)
+    {
+        $notification_type = $request->type;
+        $user = Auth::user();
+        $mail_settings = $user->mailSettings()->first();
+        $mail_settings->$notification_type = !$mail_settings->$notification_type; 
+        $mail_settings->save();
+    }
+
+    /**
      * Delete the user's account.
      *
      * @param  \Illuminate\Http\Request  $request
