@@ -28,6 +28,7 @@ $(() => {
     $('input[type="checkbox"]').on('change', handle_checkbox);
 
     setTimeout(function() {
-        $('.value-updated').fadeOut('slow');
+        $('#values-updated').fadeOut('slow');
+        $('#image-updated').fadeOut('slow');
     }, 2000);  
 });

@@ -46,9 +46,7 @@
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
-                <p
-                    class="value-updated text-sm text-gray-600"
-                >Saved.</p>
+                <p id="values-updated" class="text-sm text-gray-600">Saved.</p>
             @endif
         </div>
     </form>
