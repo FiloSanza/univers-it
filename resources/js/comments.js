@@ -2,7 +2,6 @@ import axios from "axios";
 import $ from "jquery";
 
 const ERROR_MESSAGE = `<span>ERROR WHILE GETTING THE COMMENTS</span>`;
-const DELAY = 1000;
 
 const handle_error = function(error) {
     console.log(error);
