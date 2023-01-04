@@ -19,7 +19,7 @@
             'resources/js/navbar.js',
             ])
         
-        @if (!is_null(Auth::user())) 
+        @if (!is_null(Auth::user()) && Auth::user()->hasVerifiedEmail()) 
         @vite([
             'resources/js/notifications.js',
         ])
