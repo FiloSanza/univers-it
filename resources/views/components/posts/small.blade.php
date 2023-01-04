@@ -25,7 +25,7 @@
     </div>
     <div class="clear-both">
         <h2 class="w-full text-center mb-2"> 
-            <a href="{{ route('post.show', $post->id) }}" > {{ $post->title }} </a> 
+            <a  class="underline" href="{{ route('post.show', $post->id) }}" > {{ $post->title }} </a> 
         </h2>
         <div class="flex flex-col">
             <p class="text-sm mx-auto lg:w-4/5"> {{ $post->content }} </p>
