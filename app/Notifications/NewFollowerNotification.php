@@ -44,7 +44,13 @@ class NewFollowerNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        $channels = ['database'];
+        $user = $this->user;
+        $mail_settings = $user->mailSettings()->first();
+        if ($mail_settings->new_follower) {
+            $channels[] = 'mail';
+        }
+        return $channels;
     }
 
     /**

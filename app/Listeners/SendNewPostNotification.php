@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\NewPostEvent;
 use App\Notifications\NewPostNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendNewPostNotification
 {

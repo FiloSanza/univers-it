@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -54,7 +53,13 @@ class NewPostNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        $channels = ['database'];
+        $user = $this->notified_user;
+        $mail_settings = $user->mailSettings()->first();
+        if ($mail_settings->new_post) {
+            $channels[] = 'mail';
+        }
+        return $channels;
     }
 
     /**
@@ -68,8 +73,8 @@ class NewPostNotification extends Notification
         $post_user = $this->user->name;
         
         return (new MailMessage)
-                    ->subject($post_user.'has posted!')
-                    ->greeting('Hi'.$this->notified_user->name.'!')
+                    ->subject($post_user.' has posted!')
+                    ->greeting('Hi '.$this->notified_user->name.'!')
                     ->line($post_user.'has created a new post, check it out!')
                     ->action('Go to the post!', url('/post', $this->post->id));
     }

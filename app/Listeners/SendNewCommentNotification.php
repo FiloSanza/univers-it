@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\NewCommentEvent;
 use App\Notifications\NewCommentNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendNewCommentNotification
 {

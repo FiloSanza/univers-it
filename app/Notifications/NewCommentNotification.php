@@ -3,9 +3,9 @@
 namespace App\Notifications;
 
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -46,7 +46,14 @@ class NewCommentNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        $channels = ['database'];
+        $post = $this->comment->post()->first();
+        $user = $post->user()->first();
+        $mail_settings = $user->mailSettings()->first();
+        if ($mail_settings->new_comment) {
+            $channels[] = 'mail';
+        }
+        return $channels;
     }
 
     /**
