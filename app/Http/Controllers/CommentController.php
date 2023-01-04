@@ -28,9 +28,14 @@ class CommentController extends Controller
 
         $comment->save();
 
-        event(new NewCommentEvent($comment));
+        $postid = $request->post_id;
+        $post = Post::where('id', $postid)->first();
+        $user = $post->user()->first();
+        if ($user->id != Auth::id()) {
+            event(new NewCommentEvent($comment));
+        }
 
-        return response()->json(['success' => 'success'], 200);
+        return Response('Success.', 200);
     }
 
     /**
