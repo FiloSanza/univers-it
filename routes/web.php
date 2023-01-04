@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 
 // Insert here all the routes that need to be authenticated.
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     // User profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
