@@ -84,7 +84,7 @@
                 </button>
             </div>
             
-            @auth
+            @if(Auth::check() && Auth::user()->hasVerifiedEmail())
                 <div class="hidden space-x-8 sm:-my-px sm:flex">
                     <x-nav-link :href="route('notification.show')" :active="request()->routeIs('notification.show')" role="img" aria-label="menu" title="menu">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -95,7 +95,7 @@
                         </svg>
                     </x-nav-link>
                 </div>
-            @endauth
+            @endif
         </div>
     </div>
 
