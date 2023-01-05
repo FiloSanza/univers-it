@@ -30,8 +30,11 @@
 
     <div class="border-b-2 border-gray-600 mt-4 p-4">
         <div class="flex flex-row text-gray-800">
-            <img src="{{ route('image.get', $group->image_id) }}" class="mx-2 w-7 h-7 rounded-full" alt="Group Image" />
-            <p class="text-sm my-auto"> Posted in <a href="{{ route('group.show', $group->name) }}" class="underline">{{ $group->name }}</a> by <a href="{{ route('userpage.show', $user->name) }}" class="underline"> {{ $user->name }} </a> </p>
+            <div class="min-w-fit flex flex-row">
+                <img src="{{ route('image.get', $group->image_id) }}" class="mx-2 w-7 h-7 rounded-full" alt="Group Image" />
+                <p class="text-sm my-auto"> Posted in <a href="{{ route('group.show', $group->name) }}" class="underline">{{ $group->name }}</a> by <a href="{{ route('userpage.show', $user->name) }}" class="underline"> {{ $user->name }} </a> </p>
+            </div>
+            <p class="text-xs w-full text-right my-auto"> {{ \Illuminate\Support\Carbon::parse($post->created_at)->format('Y-m-d')}} </p>
         </div>
         <header class="w-full flex flex-col lg:flex-row my-2 py-2 border-b-[1px]">
             <h1 class="mx-auto font-bold text-xl text-gray-800 leading-tight">
