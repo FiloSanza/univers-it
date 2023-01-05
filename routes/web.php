@@ -71,7 +71,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // PostReaction routes
     Route::post('/post/react', [PostReactionController::class, 'store'])->name('post-reaction.store');
-
+    Route::get('/post/reactions/{id}', [PostReactionController::class, 'getInfo'])->name('post-reaction.info');
 });
 
 // User page routes
