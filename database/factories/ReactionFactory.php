@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ReactionImage>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Reaction>
  */
-class ReactionImageFactory extends Factory
+class ReactionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,6 @@ class ReactionImageFactory extends Factory
     public function definition()
     {
         return [
-            'image_id' => Image::factory(),
             'name' => fake()->word()
         ];
     }
