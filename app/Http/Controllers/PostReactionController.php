@@ -53,12 +53,8 @@ class PostReactionController extends Controller
         $like_reaction = Reaction::where('name', 'like')->first();
         $dislike_reaction = Reaction::where('name', 'dislike')->first();
 
-        $likes = isset($like_reaction) 
-            ? PostReaction::where([ 'post_id' => $id, 'reaction_id' => $like_reaction->id ])->get()->count()
-            : 0;
-        $dislikes = isset($dislike_reaction) 
-            ? PostReaction::where([ 'post_id' => $id, 'reaction_id' => $dislike_reaction->id ])->get()->count()
-            : 0;
+        $likes = PostReaction::where([ 'post_id' => $id, 'reaction_id' => $like_reaction->id ])->get()->count();
+        $dislikes = PostReaction::where([ 'post_id' => $id, 'reaction_id' => $dislike_reaction->id ])->get()->count();
 
         if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
             $user_reaction = PostReaction::where([ 'post_id' => $id, 'user_id' => Auth::id() ])->first();
