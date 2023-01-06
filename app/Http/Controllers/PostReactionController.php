@@ -20,7 +20,6 @@ class PostReactionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate(PostReaction::VALIDATION_RULES);
         $reaction_id = Reaction::where('name', $request->reaction_name)->first()->id;
 
@@ -54,12 +53,15 @@ class PostReactionController extends Controller
         $like_reaction = Reaction::where('name', 'like')->first();
         $dislike_reaction = Reaction::where('name', 'dislike')->first();
 
-        $likes = PostReaction::where([ 'post_id' => $id, 'reaction_id' => $like_reaction->id ])->get()->count();
-        $dislikes = PostReaction::where([ 'post_id' => $id, 'reaction_id' => $dislike_reaction->id ])->get()->count();
+        $likes = isset($like_reaction) 
+            ? PostReaction::where([ 'post_id' => $id, 'reaction_id' => $like_reaction->id ])->get()->count()
+            : 0;
+        $dislikes = isset($dislike_reaction) 
+            ? PostReaction::where([ 'post_id' => $id, 'reaction_id' => $dislike_reaction->id ])->get()->count()
+            : 0;
 
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
             $user_reaction = PostReaction::where([ 'post_id' => $id, 'user_id' => Auth::id() ])->first();
-
             $user_reaction_string = isset($user_reaction) ? Reaction::where('id', $user_reaction->reaction_id)->first()->name : null;
 
             return response()->json([
