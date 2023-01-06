@@ -17,13 +17,5 @@ class ImageSeeder extends Seeder
         Image::factory()->create([
             'storage_path' => 'default-user.png'
         ]);
-
-        Image::factory()->create([
-            'storage_path' => 'mike.jpg'
-        ]);
-
-        Image::factory()->create([
-            'storage_path' => 'shaq.png'
-        ]);
     }
 }
