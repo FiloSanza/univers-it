@@ -71,7 +71,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // PostReaction routes
     Route::post('/post/react', [PostReactionController::class, 'store'])->name('post-reaction.store');
-    Route::get('/post/reactions/{id}', [PostReactionController::class, 'getInfo'])->name('post-reaction.info');
 });
 
 // User page routes
@@ -93,5 +92,8 @@ Route::get('/search', SearchController::class)->name('search.show');
 
 // Comment routes
 Route::get('/comments/{post}', [CommentController::class, 'get'])->name('comments.get');
+
+// PostReaction routes
+Route::get('/post/reactions/{id}', [PostReactionController::class, 'getInfo'])->name('post-reaction.info');
 
 require __DIR__.'/auth.php';
