@@ -14,7 +14,7 @@ class CommentController extends Controller
      * Store a newly created comment in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse 
+     * @return \Illuminate\Http\Response 
      */
     public function store(Request $request)
     {
