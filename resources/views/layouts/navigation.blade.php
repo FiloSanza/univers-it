@@ -43,6 +43,9 @@
 
                     <x-slot name="content">
                         @auth
+                            <x-dropdown-link :href="route('userpage.show', Auth::user()->name)">
+                                {{ __('User page') }}
+                            </x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
@@ -121,6 +124,9 @@
 
             <div class="mt-3 space-y-1">
                 @auth    
+                    <x-responsive-nav-link :href="route('userpage.show', Auth::user()->name)">
+                        {{ __('User page') }}
+                    </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
                     </x-response-nav-link>
