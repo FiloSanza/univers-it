@@ -40,6 +40,17 @@
                             <p class="my-auto text-m"> Has posted <a class="underline" href="{{ route('post.show', $notification->post->id) }}">{{$notification->post->title}}</a>. </p>
                         </div>
                     @break
+                    @case(NotificationTypes::NEW_REACTION)
+                        <div class="w-full flex flex-col">
+                            <div class="flex flex-row">
+                                <img class="rounded-full w-8 h-8" src="{{ route('image.get', $notification->user->propic) }}"/>
+                                <a class="my-auto underline mx-2" href="{{ route('userpage.show', $notification->user->name) }}">
+                                    {{ $notification->user->name }}
+                                </a>
+                            </div>
+                            <p class="my-auto text-m"> Reacted to <a class="underline" href="{{ route('post.show', $notification->post->id) }}">{{$notification->post->title}}</a>. </p>
+                        </div>
+                    @break
                 @endswitch
             </div>
             @unless ($notification->read)
