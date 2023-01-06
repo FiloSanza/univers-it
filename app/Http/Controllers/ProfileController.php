@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Rules\DomainValidation;
 
 class ProfileController extends Controller
 {
@@ -31,6 +33,10 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request)
     {
         $request->user()->fill($request->validated());
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users,name,'.Auth::id()],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::id(), new DomainValidation()],
+        ]);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewReactionEvent;
-use App\Models\Post;
 use App\Models\PostReaction;
 use App\Models\Reaction;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
