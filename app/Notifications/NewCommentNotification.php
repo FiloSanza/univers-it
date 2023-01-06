@@ -18,7 +18,7 @@ class NewCommentNotification extends Notification
      * 
      * @var \App\Models\User
      */
-    public $user;
+    public $notified_user;
 
     /**
      * The new comment.
@@ -28,14 +28,22 @@ class NewCommentNotification extends Notification
     public $comment;
 
     /**
+     * The user that created the comment.
+     * 
+     * @var \App\Models\User 
+     */
+    public $user;
+
+    /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $user, Comment $comment)
+    public function __construct(User $notified_user, Comment $comment)
     {
-        $this->user = $user;
+        $this->notified_user = $notified_user;
         $this->comment = $comment;
+        $this->user = $comment->user()->first();
     }
 
     /**
@@ -47,9 +55,7 @@ class NewCommentNotification extends Notification
     public function via($notifiable)
     {
         $channels = ['database'];
-        $post = $this->comment->post()->first();
-        $user = $post->user()->first();
-        $mail_settings = $user->mailSettings()->first();
+        $mail_settings = $this->notified_user->mailSettings()->first();
         if ($mail_settings->new_comment) {
             $channels[] = 'mail';
         }
@@ -69,7 +75,7 @@ class NewCommentNotification extends Notification
 
         return (new MailMessage)
             ->subject('Your post has a new comment!')
-            ->greeting('Hi '.$this->user->name.'!')
+            ->greeting('Hi '.$this->notified_user->name.'!')
             ->line($comment_user.' posted a comment under your '.$post->title.' post!')
             ->action('Go to the post!', url('/post', $post->id));
     }
@@ -83,6 +89,7 @@ class NewCommentNotification extends Notification
     public function toArray($notifiable)
     {
         return [
+            'notified_user' => $this->notified_user,
             'user' => $this->user,
             'post' => $this->comment->post()->first(),
             'comment' => $this->comment,
