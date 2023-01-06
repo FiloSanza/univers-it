@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewReactionEvent;
+use App\Models\Post;
 use App\Models\PostReaction;
 use App\Models\Reaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +45,7 @@ class PostReactionController extends Controller
 
         $post_reaction->save();
 
+        event(new NewReactionEvent($post_reaction));
         return Response('Success.', 200);
     }
 
@@ -55,7 +59,8 @@ class PostReactionController extends Controller
 
         if (Auth::check()) {
             $user_reaction = PostReaction::where([ 'post_id' => $id, 'user_id' => Auth::id() ])->first();
-            $user_reaction_string = $user_reaction ? $user_reaction->name : null;
+
+            $user_reaction_string = isset($user_reaction) ? Reaction::where('id', $user_reaction->reaction_id)->first()->name : null;
 
             return response()->json([
                 'likes' => $likes,

@@ -4,6 +4,7 @@ namespace App\ViewModels;
 use App\Notifications\NewCommentNotification;
 use App\Notifications\NewFollowerNotification;
 use App\Notifications\NewPostNotification;
+use App\Notifications\NewReactionNotification;
 use Illuminate\Notifications\DatabaseNotification;
 use App\Enums\NotificationTypes;
 
@@ -33,7 +34,7 @@ class NotificationViewModel
     /**
      * Type of the notification
      * 
-     * @var \App\Enum\NotificationTypes
+     * @var \App\Enums\NotificationTypes
      */
     public NotificationTypes $type;
 
@@ -78,6 +79,9 @@ class NotificationViewModel
             case NewPostNotification::class:
                 $this->deserializeNewPostNotification($notification);
                 break;
+            case NewReactionNotification::class:
+                $this->deserializeNewReactionNotification($notification);
+                break;
         }
     }
 
@@ -98,5 +102,11 @@ class NotificationViewModel
         $this->type = NotificationTypes::NEW_POST;
         $this->post = (object)$notification->data["post"];
         $this->user = (object)$notification->data["user"];
+    }
+
+    private function deserializeNewReactionNotification(DatabaseNotification $notification) {
+        $this->type = NotificationTypes::NEW_REACTION;
+        $this->post = (object) $notification->data["post"];
+        $this->user = (object) $notification->data["user"];
     }
 }
