@@ -6,8 +6,14 @@
     </div>
     
     <section>
-        <div class="text-center p-3">
+        <div class="text-center p-3 flex flex-col items-center">
             <h2> Unread Notifications </h2>
+            <button 
+                id='dlt-all' 
+                class="my-1 mx-2 p-2 flex flex-row inline-block rounded-xl align-right bg-blue-100 hover:bg-gray-300 content-center"
+            >
+                Clear all
+            </button>
         </div>
         <div id="unreadNotifications">
         </div>

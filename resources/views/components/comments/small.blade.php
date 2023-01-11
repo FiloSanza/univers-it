@@ -19,10 +19,10 @@
         </div>
         <div class="mt-2 w-full flex flex-row sm:flex-col sm:w-[15%] sm:max-w-20">
             @if($reply_to)
-                <a class="p-1 w-1/2 m-1 text-center font-bold bg-blue-100 rounded-xl hover:bg-blue-300 sm:w-full sm:mx-auto" href="#{{ $reply_to }}">Previous</a>
+                <a class="p-1 w-1/2 m-1 text-center font-bold bg-blue-100 rounded-xl hover:bg-gray-300 sm:w-full sm:mx-auto" href="#{{ $reply_to }}">Previous</a>
             @endif
             @auth
-                <p class="reply-p my-auto mx-auto m-1 p-1 w-1/2 text-center font-bold bg-blue-100 rounded-xl hover:bg-blue-300 sm:w-full" data-target="comment-modal">Reply</p>
+                <p class="reply-p my-auto mx-auto m-1 p-1 w-1/2 text-center font-bold bg-blue-100 rounded-xl hover:bg-gray-300 sm:w-full" data-target="comment-modal">Reply</p>
             @endauth
         </div>
     </div>
