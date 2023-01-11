@@ -10,6 +10,19 @@ Univers-it is a social network inspired by:
 - [Reddit](https://www.reddit.com/): users will post in groups
 - [Blind](https://www.teamblind.com/): only university students will be able to register. 
 
+Developed by:
+- [Filippo Sanzani](https://github.com/FiloSanza)
+- [Lorenzo Drudi](https://github.com/LorenzoDrudi)
+- [Rachele Margutti](https://github.com/Rachele01)
+
+<br/>
+
+---------------------------------
+1. [Requirements](#requirements)
+2. [Features](#features)
+3. [How-to-use](#how-to-use)
+---------------------------------
+
 ## Requirements
 The project was assigned for the "web technologies" course with the following requirements:
 - Design: max 3 pts
@@ -21,11 +34,6 @@ The project was assigned for the "web technologies" course with the following re
 - User page: max 4 pts
 - Notifications: max 5 pts
 - Extra: max 4 pts
-
-It is developed by:
-- [Filippo Sanzani](https://github.com/FiloSanza)
-- [Lorenzo Drudi](https://github.com/LorenzoDrudi)
-- [Rachele Margutti](https://github.com/Rachele01)
 
 ## Features
 
@@ -79,11 +87,11 @@ From this page users will be able to:
 ### Notifications
 
 The application will send notifications to its users for the following events:
-- A new post from a followed user.
-- A new comment under a post.
-- A new follower.
-- A new reaction to a post.
-Each notification will both be shown in the website and be sent as an email.
+- New post from a followed user.
+- New comment under a post.
+- New follower.
+- New reaction to a post.
+Each notification will both be shown in the website and be sent as an email (if selected by the user).
 
 ### Extra
 
@@ -95,3 +103,58 @@ We decided to add the following things that were not in the assignment:
 - Secure password store.
 - `Ajax`
 - `Laravel`
+
+## How-to-use
+
+- [Prerequisites](#prerequisites) 
+- [Installation](#installation)
+
+### Prerequisites
+- Git
+- Docker
+
+### Installation
+
+#### Step 1:
+Clone the repo and open it:
+```bash
+    git@github.com:FiloSanza/univers-it.git && cd univers-it
+```
+
+#### Step 2:
+Run:
+
+```bash
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
+#### Step 3
+Write you own `.env` file (See an [example](.env.example)). \
+You can also copy our with ```bash cp .env.example .env ```
+
+#### Step 4
+Run:
+```bash
+    ./vendor/bin/sail up
+```
+
+#### Step 5
+In a new shell run:
+```bash
+    docker exec -it univers-it-laravel.test-1 /bin/bash
+```
+#### Step 6
+Inside the container's shell opened in the previous step run:
+ ```bash
+    npm install --save && npm run dev
+ ```
+ 
+ #### Step 7
+ Go to ```localhost``` in your browser.
+ 
+ To see emails you can use `Mailhog` (```localhost:8025```).
