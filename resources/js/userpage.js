@@ -10,15 +10,15 @@ const handle_click = function(evt) {
     const operation = $(this).text().trim().toLowerCase();
     const data = { 'followed_id': id };
 
-    axios.post(`/user/${operation}`,data).then(
-        () => {
-            if ($(evt.target).data('follow-main') !== undefined) {
-                window.location.reload();
-                return;
-            }
-            load_data();
+    axios.post(`/user/${operation}`,data)
+    .then(() => {
+        if ($(evt.target).data('follow-main') !== undefined) {
+            window.location.reload();
+            return;
         }
-    );
+        load_data();
+    })
+    .catch((error) => console.log(error));
 }
 
 const load_data = function() {

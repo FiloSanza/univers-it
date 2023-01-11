@@ -24,7 +24,7 @@
     <div class="flex flex-col items-center lg:flex-row border-b-2 border-gray-600 p-3">
         <div class="flex flex-col hidden lg:w-1/5 lg:block">
             <img class="mx-auto w-24 h-24 rounded-full" src="{{ route('image.get', $group->image_id) }}" alt="{{ $group->name }} profile picture." />
-            @auth
+            @if(Auth::check() && Auth::user()->hasVerifiedEmail())
                 <div class="w-1/2 text-center lg:w-full lg:my-3">
                     <x-follow-button :groupid="$group->id" :isfollowed="$already_followed" :ismainbutton="true" />
                 </div>
@@ -33,7 +33,7 @@
                         Post
                     </a>
                 </div>
-            @endauth
+            @endif
         </div>
         <img class="mx-auto w-24 h-24 rounded-full lg:hidden" src="{{ route('image.get', $group->image_id) }}" alt="{{ $group->name }} profile picture." />
         <div class="text-center lg:w-4/5">

@@ -21,9 +21,9 @@
             @if($reply_to)
                 <a class="p-1 w-1/2 m-1 text-center font-bold bg-blue-100 rounded-xl hover:bg-gray-300 sm:w-full sm:mx-auto" href="#{{ $reply_to }}">Previous</a>
             @endif
-            @auth
+            @if(Auth::check() && Auth::user()->hasVerifiedEmail())
                 <p class="reply-p my-auto mx-auto m-1 p-1 w-1/2 text-center font-bold bg-blue-100 rounded-xl hover:bg-gray-300 sm:w-full" data-target="comment-modal">Reply</p>
-            @endauth
+            @endif
         </div>
     </div>
 </div>

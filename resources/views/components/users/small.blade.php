@@ -6,7 +6,7 @@
             {{ $user->name }} 
         </a>
     </div>
-    @unless(is_null($already_followed) || Auth::id() === $user->id)
+    @unless(! (Auth::check() &&Auth::user()->hasVerifiedEmail()) || is_null($already_followed) || Auth::id() === $user->id)
         <div class="w-1/3 flex flex-row-reverse">
             <x-follow-button :userid="$user->id" :isfollowed="$already_followed" />
         </div>

@@ -44,7 +44,7 @@
                         <small>Following</small>
                     </div>
                 </div>
-                @if(Auth::user() !== null && Auth::id() !== $user->id)
+                @if(Auth::user() !== null && Auth::user()->hasVerifiedEmail() && Auth::id() !== $user->id)
                     <div class="m-auto h-10 grid place-items-center">
                         <x-follow-button :userid="$user->id" :isfollowed="$already_followed" :ismainbutton="true" />
                     </div>
