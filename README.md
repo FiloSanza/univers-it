@@ -15,7 +15,6 @@ Developed by:
 - [Lorenzo Drudi](https://github.com/LorenzoDrudi)
 - [Rachele Margutti](https://github.com/Rachele01)
 
-<br/>
 
 ---------------------------------
 1. [Requirements](#requirements)
