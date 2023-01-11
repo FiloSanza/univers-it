@@ -2,18 +2,20 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Image;
+use Illuminate\Database\Seeder;
 
 class ImageSeeder extends Seeder
 {
     /**
-     * Run the images seeds.
+     * Seed the application's database.
      *
      * @return void
      */
     public function run()
     {
-        Image::factory()->create();
+        Image::factory()->create([
+            'storage_path' => 'default-user.png'
+        ]);
     }
 }

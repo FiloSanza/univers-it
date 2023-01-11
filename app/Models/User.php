@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\MailSettings;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -86,6 +87,15 @@ class User extends Authenticatable
             'follower_id',      // Foreign key for this user in the pivot table.
             'followed_id'       // Foreign key pointing to the followed user model.
         );
+    }
+
+    /**
+     * Returns the user's mail settings.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function mailSettings() {
+        return $this->hasOne(MailSettings::class);
     }
 
     /**

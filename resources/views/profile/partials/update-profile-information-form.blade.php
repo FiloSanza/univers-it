@@ -6,7 +6,7 @@
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
-    </form>
+    </form>   
 
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
@@ -46,13 +46,7 @@
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >Saved.</p>
+                <p id="values-updated" class="text-sm text-gray-600">Saved.</p>
             @endif
         </div>
     </form>

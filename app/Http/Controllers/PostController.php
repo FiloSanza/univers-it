@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Group;
+use App\Events\NewPostEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -48,6 +49,8 @@ class PostController extends Controller
         }
 
         $post->save();
+
+        event(new NewPostEvent($post));
 
         return redirect()->route('post.show', ['id' => $post->id]);
     }

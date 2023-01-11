@@ -38,13 +38,22 @@ class Post extends Model
     }
 
     /**
+     * Returns all the reactions to this post.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reactions() {
+        return $this->hasMany(PostReaction::class);
+    }
+
+    /**
      * All the validation rule that the HTTP request needs to pass.   
      * 
      * @var array<string,string>
      */
     public const VALIDATION_RULES = [
         'title' => 'required|string|max:255',
-        'content' => 'required|text',
+        'content' => 'required|string',
         'group_id' => 'required|int|exists:groups,id',
         // TODO: 'image' => 'required|image|size:2048|mimes:jpeg,jpg,png,gif'           // Max 2Mb
     ];
