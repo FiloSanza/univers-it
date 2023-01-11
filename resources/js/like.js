@@ -33,10 +33,7 @@ const update_reactions = function() {
 
 const handle_click = function(button_name) {
     $.post("/post/react", { "post_id": post_id, "reaction_name": button_name })
-        .then(response => {
-            console.log(response);
-            update_reactions();
-        })
+        .then(() => update_reactions())
         .catch(err => console.log(err));
 }
 

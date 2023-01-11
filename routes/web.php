@@ -10,7 +10,6 @@ use App\Http\Controllers\MailSettingsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReactionImageController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PostReactionController;
@@ -71,7 +70,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // PostReaction routes
     Route::post('/post/react', [PostReactionController::class, 'store'])->name('post-reaction.store');
-    Route::get('/post/reactions/{id}', [PostReactionController::class, 'getInfo'])->name('post-reaction.info');
 });
 
 // User page routes
@@ -93,5 +91,8 @@ Route::get('/search', SearchController::class)->name('search.show');
 
 // Comment routes
 Route::get('/comments/{post}', [CommentController::class, 'get'])->name('comments.get');
+
+// PostReaction routes
+Route::get('/post/reactions/{id}', [PostReactionController::class, 'getInfo'])->name('post-reaction.info');
 
 require __DIR__.'/auth.php';

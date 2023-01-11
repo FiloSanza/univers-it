@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewReactionEvent;
-use App\Models\Post;
 use App\Models\PostReaction;
 use App\Models\Reaction;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +18,6 @@ class PostReactionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate(PostReaction::VALIDATION_RULES);
         $reaction_id = Reaction::where('name', $request->reaction_name)->first()->id;
 
@@ -57,9 +54,8 @@ class PostReactionController extends Controller
         $likes = PostReaction::where([ 'post_id' => $id, 'reaction_id' => $like_reaction->id ])->get()->count();
         $dislikes = PostReaction::where([ 'post_id' => $id, 'reaction_id' => $dislike_reaction->id ])->get()->count();
 
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
             $user_reaction = PostReaction::where([ 'post_id' => $id, 'user_id' => Auth::id() ])->first();
-
             $user_reaction_string = isset($user_reaction) ? Reaction::where('id', $user_reaction->reaction_id)->first()->name : null;
 
             return response()->json([
