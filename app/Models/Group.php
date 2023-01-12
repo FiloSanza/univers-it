@@ -13,10 +13,19 @@ class Group extends Model
     /**
      * Returns the user that created the post.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Returns all the posts in the group.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts() {
+        return $this->hasMany(Post::class);
     }
 
     /**
@@ -26,6 +35,7 @@ class Group extends Model
      */
     public const VALIDATION_RULES = [
         'name' => 'required|string|max:255',
-        'description' => 'required|string|max:500'
+        'description' => 'required|string|max:500',
+        // TODO: 'image' => 'required|image|size:2048|mimes:jpeg,jpg,png,gif'           // Max 2Mb
     ];
 }

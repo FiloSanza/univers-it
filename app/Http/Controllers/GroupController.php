@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -30,11 +31,11 @@ class GroupController extends Controller
         $request->validate(Group::VALIDATION_RULES);
 
         $group = new Group();
-        $group->creator_id = Auth::id();
 
-        foreach (Group::VALIDATION_RULES as $field => $_) {
-            $group->$field = $request->$field;
-        }
+        $group->creator_id = Auth::id();
+        $group->name = $request->name;
+        $group->description = $request->description;
+        $group->image_id = ImageController::persist($request->image);
 
         $group->save();
 
@@ -45,7 +46,7 @@ class GroupController extends Controller
      * Display the specified resource.
      *
      * @param string $id
-     * @return \Illuminate\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(string $name)
     {

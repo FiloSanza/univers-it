@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Univers-it'),
 
     /*
     |--------------------------------------------------------------------------
@@ -208,8 +208,10 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
-    ])->toArray(),
+    'aliases' => 
+        Facade::defaultAliases()->merge([
+            'Helper' => App\Helpers\Helper::class,
+            'NotificationTypes' => App\Enums\NotificationTypes::class,
+        ])->toArray(),
 
 ];

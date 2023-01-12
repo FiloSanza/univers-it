@@ -26,8 +26,8 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker()->word(),
-            'description' => $this->faker()->paragraph(2),
+            'name' => $this->faker->word(),
+            'description' => $this->faker->paragraph(),
             'creator_id' => User::factory(), 
         ];
     }
